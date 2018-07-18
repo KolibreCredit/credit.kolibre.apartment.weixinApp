@@ -1,0 +1,112 @@
+/**app.wxss**/
+@import "utils/showToast.wxss";
+.container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.btn {
+  border-radius: 40px;
+  background-color:#ff8c14;
+}
+.btn:active {
+  z-index:20;
+  background: #F96718 !important;
+  box-shadow: 0 2px 6px 0 rgba(251, 146, 40, 0.70);
+}
+.oneLineBtm.btn {
+  height:44px;color:#ffffff;font-size:18px;width:90%;border:none
+}
+
+.row {
+  position: relative;
+  display: flex;
+  padding: 10px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #e9e9e9;
+  /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);*/
+}
+
+.col_hd {
+  display: inline-block;
+  width: auto;
+  margin-right: 8px;
+  white-space: nowrap;
+  font-size: 16px;
+  color: #646464;
+}
+
+.col_hd image {
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
+}
+
+.col_bd {
+  display: inline-block;
+  width: 100%;
+}
+
+.col_bd input, picker {
+  padding-right: 15px;
+  font-size: 16px;
+  color: #000000;
+}
+
+.col_bd_p {
+  font-size: 16px;
+  color: #646464;
+  padding-left: 10px;
+}
+
+.arrow {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background-image: url(http://www.yintongzhengxin.com/wxAppImgs/ic_grey_arrow.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.badge {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  background: #ff0000;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 8px;
+  display: none;
+}
+
+.stepView {
+  text-align:center; padding: 20px 20px 40px 20px
+}
+.stepView .stepsImage {
+  width: 100%;
+}
+.stepsInfo {
+  text-align:center;
+}
+.stepsInfo .inputTitle {
+  font-size:16px;
+  color:#646464;
+}
+.colorOrange {
+  color:#fb9329 !important;
+}
+.identifyInputArea {
+  background: #fff;
+  margin: 20px 0 30px;
+}

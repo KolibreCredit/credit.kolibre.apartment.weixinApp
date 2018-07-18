@@ -1,0 +1,3 @@
+<!--pages/bill/bill.wxml-->
+<text>pages/bill/bill.wxml</text>
+<tabbar bindchange="tabChange" data="{{tabbar}}"></tabbar>

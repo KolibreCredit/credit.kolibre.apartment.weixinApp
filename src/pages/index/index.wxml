@@ -1,0 +1,92 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+    <scroll-view style="height:100vh" scroll-y="true" upper-threshold="180" bindscroll="scroll"
+                 bindscrolltoupper="upper">
+        <view wx:if="{{isbg}}" style="text-align:center;position:relative">
+            <image src="../../images/bg.png" style="width:100%;height:180px;vertical-align:bottom"></image>
+        </view>
+        <view style="text-align:center;background-color:white;width:100%" class="{{isbg ? '' : 'topFilter'}}">
+            <view class="search">
+                <view class="item" data-index="0" bindtap="tabItem">
+                    <span class="condition">城市</span>
+                    <image wx:if="{{tabIndex==0}}" class="jiantou" src="../../images/search-jiantous.png"/>
+                    <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
+                    <image class="line" src="../../images/search-Line.png"/>
+                </view>
+                <view class="item" data-index="1" bindtap="tabItem">
+                    <span class="condition">区域</span>
+                    <image wx:if="{{tabIndex==1}}" class="jiantou" src="../../images/search-jiantous.png"/>
+                    <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
+                    <image class="line" src="../../images/search-Line.png"/>
+                </view>
+                <view class="item" data-index="2" bindtap="tabItem">
+                    <span class="condition" style="display:inline-block">租金</span>
+                    <image wx:if="{{tabIndex==2}}" class="jiantou" src="../../images/search-jiantous.png"/>
+                    <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
+                    <image class="line" src="../../images/search-Line.png"/>
+                </view>
+                <view class="item" data-index="3" bindtap="tabItem">
+                    <image class="sort" src="../../images/search-sort.png"/>
+                    <image wx:if="{{tabIndex==3}}" class="jiantou" src="../../images/search-jiantous.png"/>
+                    <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
+                </view>
+                <view class="item">
+                    <image wx:if="{{modelIndex==0}}" class="model" src="../../images/search-list.png" data-index="1"
+                           bindtap="tabModel"/>
+                    <image wx:else class="model" src="../../images/search-view.png" data-index="0" bindtap="tabModel"/>
+                </view>
+            </view>
+        </view>
+        <view class="{{isbg ? 'viewContent1' : 'viewContent2'}}">
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+            <view>pages/houses.wxml</view>
+
+        </view>
+    </scroll-view>
+</view>
+<tabbar data="{{tabbar}}"></tabbar>

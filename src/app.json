@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/bill/bill",
+    "pages/lease/lease",
+    "pages/service/service",
+    "pages/user/user"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "蜂鸟小屋",
+    "navigationBarTextStyle": "black"
+  }
+}
