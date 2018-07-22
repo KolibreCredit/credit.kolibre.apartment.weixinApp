@@ -1,20 +1,16 @@
 //app.js
-import WxValidate from 'utils/WxValidate';
-let config = require('config');
 App({
-    config: config,
-    setStorageSync: function(key, value) {
+    setStorageSync: function (key, value) {
         wx.setStorageSync(key, value);
     },
-    getStorageSync: function(key) {
+    getStorageSync: function (key) {
         return wx.getStorageSync(key);
     },
-    removeStorageSync: function(key) {
+    removeStorageSync: function (key) {
         wx.removeStorageSync(key);
     },
-
-    postRequest: function(apiUrl, data, cbSuccess, cbfail) {
-        var auth = this.getStorageSync(config.COOKIES.AUTH);
+    postRequest: function (apiUrl, data, cbSuccess, cbfail) {
+        var auth = this.getStorageSync("X-KC-SID");
         wx.request({
             url: apiUrl,
             data: data,
@@ -23,13 +19,13 @@ App({
                 "X-KC-SID": auth
             },
             method: "POST",
-            success: function(res) {
+            success: function (res) {
                 if (res.statusCode == 200) {
                     typeof cbSuccess == "function" && cbSuccess(res.data);
                 }
                 else {
                     if (res.statusCode == 401) {
-                        wx.navigateTo({ url: 'login' });
+                        wx.navigateTo({url: 'login'});
                     } else if (res.statusCode == 400) {
                         wx.showToast({
                             title: res.data.message,
@@ -54,7 +50,7 @@ App({
                     typeof cbfail == "function" && cbfail(res);
                 }
             },
-            fail: function() {
+            fail: function () {
                 wx.showToast({
                     title: "网络链接异常,请稍后",
                     image: "/images/err.png",
@@ -64,8 +60,8 @@ App({
         });
     },
 
-    getRequest: function(apiUrl, cbSuccess, cbfail) {
-        var auth = this.getStorageSync(config.COOKIES.AUTH);
+    getRequest: function (apiUrl, cbSuccess, cbfail) {
+        var auth = this.getStorageSync("X-KC-SID");
         wx.request({
             url: apiUrl,
             header: {
@@ -73,13 +69,13 @@ App({
                 "X-KC-SID": auth
             },
             method: "GET",
-            success: function(res) {
+            success: function (res) {
                 if (res.statusCode == 200) {
                     typeof cbSuccess == "function" && cbSuccess(res.data);
                 }
                 else {
                     if (res.statusCode == 401) {
-                        wx.navigateTo({ url: 'login' });
+                        wx.navigateTo({url: 'login'});
                     } else if (res.statusCode == 400) {
                         wx.showToast({
                             title: res.data.message,
@@ -104,7 +100,7 @@ App({
                     typeof cbfail == "function" && cbfail(res);
                 }
             },
-            fail: function() {
+            fail: function () {
                 wx.showToast({
                     title: "网络链接异常,请稍后",
                     image: "/images/err.png",
@@ -114,12 +110,12 @@ App({
         });
     },
 
-    postUploadFile: function(filePath, cbSuccess) {
+    postUploadFile: function (apiUrl, filePath, cbSuccess) {
         wx.uploadFile({
-            url: config.URLS.UPLOADIMAGES,
+            url: apiUrl,
             filePath: filePath,
             name: 'file',
-            success: function(res) {
+            success: function (res) {
                 if (res.statusCode === 200) {
                     typeof cbSuccess == "function" && cbSuccess(JSON.parse(res.data)[0]);
                 }
@@ -132,7 +128,7 @@ App({
                     });
                 }
             },
-            fail: function(err) {
+            fail: function (err) {
                 wx.showToast({
                     title: err.errMsg,
                     image: "/images/err.png",
@@ -142,7 +138,7 @@ App({
         });
     },
 
-    stringFormat: function() {
+    stringFormat: function () {
         if (arguments.length == 0)
             return null;
         var str = arguments[0];
@@ -151,6 +147,5 @@ App({
             str = str.replace(re, arguments[i]);
         }
         return str;
-    },
-    WxValidate: (rules, messages) => new WxValidate(rules, messages)
+    }
 });

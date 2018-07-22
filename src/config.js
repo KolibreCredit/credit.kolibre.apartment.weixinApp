@@ -1,48 +1,9 @@
 var config = {
     URLS: {
-        // Apartment
-        REGISTER: 'https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccount/Register',
-        LOGINBYPASSWORD: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccount/LoginByPassword",
-        LOGINBYSMSCODE: 'https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccount/LoginBySmsCode',
-        CHANGEPASSWORD: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccount/ChangePassword",
-        VERIFY: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Credit/Verify",
-        CREATEHOUSEINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseInformation/CreateHouseInfo",
-        CREATELEASE: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Lease/CreateLease",
-        CREATEACCOUNTINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/Create",
-        FINDLEASEORDER: 'https://server-fengniaowu.dev.kolibre.credit/Apartment/LeaseOrder/FindLeaseOrder?pageIndex=0&pageSize=200&leaseOrderState={0}',
-        FINDLEASEORDERBYLEASEID: "https://server-fengniaowu.dev.kolibre.credit/Apartment/LeaseOrder/FindLeaseOrderByLeaseId?leaseId={0}",
-        FINDLEASEORDERBYORDERID: "https://server-fengniaowu.dev.kolibre.credit/Apartment/LeaseOrder/FindLeaseOrderByOrderId?leaseOrderId={0}",
-        GETLEASES: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Lease/GetLease",
-        GETLEASEINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Lease/GetLeaseInfo?leaseId={0}",
-        GETCURRENTHOUSEACCOUNT: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccount/GetCurrentHouseAccount",
-        GETCURRENTHOUSEACCOUNTINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/GetCurrentHouseAccountInfo",
-        ISLEASEORDERSTAGING: "https://server-fengniaowu.dev.kolibre.credit/Apartment/LeaseOrder/IsLeaseOrderStaging",
-        CREATEREPORT: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Credit/CreateReport",
-        CREATEEXTENSIONINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/CreateExtensionInfo",
-        UPLOADCONTRACTIMAGES: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/V2/UploadContractImages",
-        ADDCONTACTINFO: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/AddContactInfo",
-        CREATEAPARTMENTREPORT: "https://server-fengniaowu.dev.kolibre.credit/Apartment/HouseAccountInfo/CreateApartmentReport",
-        GETCREDITAUDITRESULT: "https://server-fengniaowu.dev.kolibre.credit/Apartment/Credit/GetCreditAuditResult?apartmentReportId={0}",
-        // WeChatApplet
-        GETOPNEID: "https://server-fengniaowu.dev.kolibre.credit/Apartment/WeChatApplet/GetOpneId",
-        CREATETRANSACTION: "https://server-fengniaowu.dev.kolibre.credit/Apartment/WeChatApplet/CreateTransaction",
-        // Utilities
-        UPLOADIMAGES: "https://server-fengniaowu.dev.kolibre.credit/Utilities/Files/UploadImages",
-        // Sms
-        SENDCAPTCHA: "https://server-fengniaowu.dev.kolibre.credit/Services/Sms/SendCaptcha",
-        VERIFYCAPTCHA: "https://server-fengniaowu.dev.kolibre.credit/Services/Sms/VerifyCaptcha"
-    },
-    COOKIES: {
-        TAG: "X-KC-TAG",
-        AUTH: 'X-KC-SID',
-        LEASEID: "X-KC-LEASEID",
-        LEASEID2: "X-KC-LEASEID2",
-        REPORTID: 'X-KC-REPORTID',
-        BATCHID: 'X-KC-BATCHID',
-        ACCOUNTEXTENSIONINFOID: 'X-KC-ACCOUNTEXTENSIONINFOID'
+        GETROOMSOURCES: "https://kc-fengniaowu-talos.kolibre.credit/api/Room/GetRoomSources"
     },
     REGEX: {
-        CELLPHONE: /^(13|14|15|16|17|18)\d{9}$/,
+        CELLPHONE: /^(10|13|14|15|16|17|18)\d{9}$/,
         PASSWORD: /^[a-zA-Z\d~!@#$%^&*_]{6,18}$/,
         PAYMENT_PASSWORD: /^(?![^a-zA-Z~!@#$%^&*_]+$)(?!\D+$).{8,18}$/,
         URL: /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[:?\d]*)\S*$/,
