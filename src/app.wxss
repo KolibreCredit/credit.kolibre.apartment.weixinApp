@@ -1,24 +1,31 @@
 /**app.wxss**/
 @import "utils/showToast.wxss";
 .container {
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-size: 16px;
-  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
+
 .btn {
   border-radius: 40px;
-  background-color:#ff8c14;
+  background-color: #ff8c14;
 }
+
 .btn:active {
-  z-index:20;
+  z-index: 20;
   background: #F96718 !important;
   box-shadow: 0 2px 6px 0 rgba(251, 146, 40, 0.70);
 }
+
 .oneLineBtm.btn {
-  height:44px;color:#ffffff;font-size:18px;width:90%;border:none
+  height: 44px;
+  color: #ffffff;
+  font-size: 18px;
+  width: 90%;
+  border: none
 }
 
 .row {
@@ -91,21 +98,27 @@
 }
 
 .stepView {
-  text-align:center; padding: 20px 20px 40px 20px
+  text-align: center;
+  padding: 20px 20px 40px 20px
 }
+
 .stepView .stepsImage {
   width: 100%;
 }
+
 .stepsInfo {
-  text-align:center;
+  text-align: center;
 }
+
 .stepsInfo .inputTitle {
-  font-size:16px;
-  color:#646464;
+  font-size: 16px;
+  color: #646464;
 }
+
 .colorOrange {
-  color:#fb9329 !important;
+  color: #fb9329 !important;
 }
+
 .identifyInputArea {
   background: #fff;
   margin: 20px 0 30px;

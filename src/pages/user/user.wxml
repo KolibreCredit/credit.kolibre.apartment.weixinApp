@@ -1,3 +1,43 @@
 <!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<import src="../../utils/wxStar.wxml"/>
+<view class="container">
+    <view class="bgImg"></view>
+    <view class="userInfoDiv">
+        <view style="margin-top:40px;height:22px"><span class="userName" id="lbRealName"></span></view>
+        <view style="height:30px;margin-top:10px"><span class="accountNo" id="lbCellphone"></span></view>
+        <image src="../../images/ic_userImg.png"/>
+    </view>
+    <view style="font-size:14px;color:#666666;text-align:center;display:flex">
+        <view>
+            信用等级
+        </view>
+        <view>
+            <template is="wxStar" data="{{wxStar: wxStar}}"/>
+        </view>
+    </view>
+    <view style="background-color:#ffffff">
+        <view class="userManageList">
+            <view>
+                <a class="item1" href="list.html">
+                    我的租约<span style="font-size:16px;color:#333333;position: absolute;right:50px">待处理<span
+                        style="background:#ff0100;width:7px;height:7px;border-radius:100%;display:inline-block;margin-left:5px"></span></span>
+                </a>
+            </view>
+            <view>
+                <a class="item2" onclick="bill()" style="border-bottom: none">我的账单</a>
+            </view>
+            <view style="height:10px;background:#f8f8f8">
+            </view>
+            <view>
+                <a class="item3" href="credit.html">信用管理</a>
+            </view>
+            <view>
+                <a class="item5" href="fuwu.html">生活服务</a>
+            </view>
+            <view>
+                <a class="item4" href="user1.html" style=" border-bottom: none">个人设置</a>
+            </view>
+        </view>
+    </view>
+</view>
 <tabbar data="{{tabbar}}"></tabbar>

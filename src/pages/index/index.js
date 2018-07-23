@@ -35,7 +35,12 @@ Page({
         tabIndex: -1,
         isFilter: false,
         modelIndex: 0,
-        roomSources: null,
+        isSources: false,
+        cities: null,
+        districts: null,
+        apartments: null,
+        rooms: null,
+        filterRooms: null,
         prices: ["不限", "2000元以下", " 2000-3000元", " 3000-4000元", "4000-5000元", "  5000-6000元", "6000元以上"],
         sorts: ["推荐", "最新发布", "价格升序", "价格降序", "面积升序", "面积降序"],
         searchIndex0: -1,
@@ -61,26 +66,30 @@ Page({
         var that = this;
         app.postRequest(config.URLS.GETROOMSOURCES, data, function (res) {
             if (res.succeeded) {
-                var resRoomSources = res.data;
-                resRoomSources.cities = ["不限"].concat(resRoomSources.cities);
-                resRoomSources.districts = ["不限"].concat(resRoomSources.districts);
-                that.setData({roomSources: resRoomSources});
+                that.setData({
+                    cities: ["不限"].concat(res.data.cities),
+                    districts: ["不限"].concat(res.data.districts),
+                    apartments: res.data.apartments,
+                    rooms: res.data.rooms,
+                    filterRooms: res.data.rooms,
+                    isSources: true
+                });
             }
         }, function (err) {
             mui.toast(err.message);
         });
     },
     upper: function (e) {
-         this.setData({
-           isbg: true
-       });
+        this.setData({
+            isbg: true
+        });
     },
     scroll: function (e) {
-           if (this.data.isbg && e.detail.scrollTop > 180) {
-               this.setData({
-                   isbg: false
-               });
-           }
+        if (this.data.isbg && e.detail.scrollTop > 180) {
+            this.setData({
+                isbg: false
+            });
+        }
     },
     tabItem: function (e) {
         this.setData({
@@ -94,6 +103,64 @@ Page({
             modelIndex: e.currentTarget.dataset.index * 1
         });
     },
+    filterRoomsData: function () {
+        var cityKey = (this.data.searchIndex0 == -1 ? "" : this.data.cities[this.data.searchIndex0]);
+        var districtKey = (this.data.searchIndex1 == -1 ? "" : this.data.districts[this.data.searchIndex1]);
+        var minRetail = 0;
+        var maxRetail = 0;
+        var retailKey = (this.data.searchIndex2 == -1 ? "" : this.data.prices[this.data.searchIndex2]);
+        if (retailKey != "") {
+            if (retailKey.indexOf("以下") != -1) {
+                minRetail = 0;
+                maxRetail = parseInt(retailKey.replace("元以下", "").trim());
+            }
+            else if (retailKey.indexOf("以上") != -1) {
+                minRetail = parseInt(retailKey.replace("元以上", "").trim());
+                maxRetail = 10000000;
+            } else {
+                minRetail = parseInt(retailKey.split("-")[0]);
+                maxRetail = parseInt(retailKey.split("-")[1].replace("元", "").trim())
+            }
+        }
+        var apartmentName = (this.data.searchIndex4 == -1 ? "" : this.data.apartments[this.data.searchIndex4]);
+        var rooms = this.data.rooms;
+        var arrayItems = [];
+        for (var i = 0; i < rooms.length; i++) {
+            if (cityKey != "" && rooms[i].cityName != cityKey) {
+                continue;
+            }
+            if (districtKey != "" && rooms[i].districtName != districtKey) {
+                continue;
+            }
+            if (apartmentName != "" && rooms[i].apartmentName != apartmentName) {
+                continue;
+            }
+            if (retailKey != "") {
+                if ((rooms[i].retailPrice * 0.01) >= minRetail && (rooms[i].retailPrice * 0.01) <= maxRetail) {
+                    arrayItems.push(rooms[i]);
+                }
+            } else {
+                arrayItems.push(rooms[i]);
+            }
+        }
+        var sortKey = (this.data.searchIndex3 == -1 ? "" : this.data.sorts[this.data.searchIndex3]);
+        if (sortKey == "最新发布") {
+            arrayItems.sort(compare("publishTime", "desc"));
+        }
+        else if (sortKey == "价格升序") {
+            arrayItems.sort(compare("retailPrice", "asc"));
+        }
+        else if (sortKey == "价格降序") {
+            arrayItems.sort(compare("retailPrice", "desc"));
+        }
+        else if (sortKey == "面积升序") {
+            arrayItems.sort(compare("roomTypeSize", "asc"));
+        }
+        if (sortKey == "面积降序") {
+            arrayItems.sort(compare("roomTypeSize", "desc"));
+        }
+        this.setData({filterRooms: arrayItems});
+    },
     searchFilter0: function (e) {
         var index = e.currentTarget.dataset.index * 1;
         index = (index == 0 ? -1 : index);
@@ -101,6 +168,7 @@ Page({
             searchIndex0: index,
             isFilter: false
         });
+        this.filterRoomsData();
     },
     searchFilter1: function (e) {
         var index = e.currentTarget.dataset.index * 1;
@@ -109,6 +177,7 @@ Page({
             searchIndex1: index,
             isFilter: false
         });
+        this.filterRoomsData();
     },
     searchFilter2: function (e) {
         var index = e.currentTarget.dataset.index * 1;
@@ -117,6 +186,7 @@ Page({
             searchIndex2: index,
             isFilter: false
         });
+        this.filterRoomsData();
     },
     searchFilter3: function (e) {
         var index = e.currentTarget.dataset.index * 1;
@@ -125,11 +195,19 @@ Page({
             searchIndex3: index,
             isFilter: false
         });
+        this.filterRoomsData();
     },
     searchFilter4: function (e) {
         var index = e.currentTarget.dataset.index * 1;
         this.setData({
-            searchIndex4: index
+            searchIndex4: (this.data.searchIndex4 == index ? -1 : index)
+        });
+        this.filterRoomsData();
+    },
+    detail2: function (e) {
+        var roomId = e.currentTarget.dataset.roomid;
+        wx.navigateTo({
+            url: '/pages/index/detail?roomId=' + roomId
         });
     }
 })

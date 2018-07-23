@@ -11,6 +11,7 @@
   color: #999;
   background-color: #fff;
   padding: 0;
+  z-index: 2;
 }
 
 .c_tabbar .tabbar_item {

@@ -1,0 +1,21 @@
+var filter = {
+    formatPrice2: function (Price) {
+        if (Price > 0) {
+            Price = Number(Price * 0.01);
+            return Price.toFixed(0) + "元/月";
+        } else {
+            return "敬请期待…";
+        }
+    },
+    roomSourcesPictures: function (pictures) {
+        if (pictures != null) {
+            return pictures[0];
+        } else {
+            return "../../images/dataErr.png";
+        }
+    }
+};
+module.exports = {
+    formatPrice2: filter.formatPrice2,
+    roomSourcesPictures: filter.roomSourcesPictures
+}

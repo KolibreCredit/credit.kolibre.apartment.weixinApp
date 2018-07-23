@@ -4,7 +4,8 @@
     "pages/bill/bill",
     "pages/lease/lease",
     "pages/service/service",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/index/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

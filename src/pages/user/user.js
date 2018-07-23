@@ -1,5 +1,6 @@
 // pages/user/user.js
 let tabbar = require('../tabbar');
+var wxStar = require('../../utils/wxStar');
 Page({
 
   /**
@@ -17,6 +18,7 @@ Page({
       this.setData({
           tabbar: tabbar
       });
+      wxStar.wxStar(this,5,true);
   },
 
   /**
