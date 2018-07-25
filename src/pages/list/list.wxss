@@ -1,0 +1,122 @@
+/* pages/list/list.wxss */
+page {
+  background-color: #f4f4f4;
+}
+
+.mui-table-view {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  background-color: #fff;
+}
+
+.mui-table-view:first-child {
+  margin-top: 0;
+}
+
+.mui-table-view-cell {
+  padding: 5px 15px;
+}
+
+.mui-table-view:before, .mui-table-view-cell:after, .mui-table-view:after {
+  height: 0;
+}
+
+.mui-table-view-chevron .mui-table-view-cell {
+  padding-right: 0;
+}
+
+.mui-navigate-right:after, .mui-push-left:after, .mui-push-right:after {
+  top: 50px;
+  z-index: 999;
+}
+
+.mui-table-view .mui-media, .mui-table-view .mui-media-body {
+  overflow: hidden;
+}
+
+.mui-media-body {
+  position: relative;
+  width: 100%;
+}
+
+.ic_grey_arrow {
+  position: absolute;
+  right: 0;
+  top: 42px;
+  width: 18px;
+  height: 18px;
+}
+
+.mui-ellipsis {
+  height: 30px;
+  line-height: 30px;
+}
+
+.btnPay {
+  background: #ff8c14;
+  width: 88px;
+  border: none;
+  font-size: 14px;
+  color: #ffffff;
+  float: right;
+  height: 30px;
+  line-height: 30px;
+}
+
+.btnEviction, .btnQuash {
+  background: #FFFFFF;
+  border: 1px solid #ff8c14;
+  width: 88px;
+  font-size: 14px;
+  color: #ff8c14;
+  float: right;
+  height: 30px;
+  line-height: 30px;
+}
+
+.lbPay {
+  font-size: 14px;
+  color: #7ed321;
+  display: inline-block;
+  float: right;
+}
+
+.icon {
+  width: 72px;
+  height: 72px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.staged {
+  color: #7ed321;
+}
+
+.eviction {
+  color: #ff7e71;
+}
+
+.msg-alert {
+  z-index: 2;
+}
+
+.listTip {
+  background: #FFF4EB;
+  height: 30px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #ff8c14;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.listLeases {
+  margin-top: 30px;
+}

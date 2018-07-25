@@ -13,9 +13,94 @@ var filter = {
         } else {
             return "../../images/dataErr.png";
         }
+    },
+    formatYYYMMDD: function (date) {
+        return date.substring(0, 10);
+    },
+    formatYYYMMDDHHMM: function (date) {
+        return date.substring(0, 16);
+    },
+    formatAmount: function (amount) {
+        amount = Number(amount * 0.01);
+        return amount.toFixed(2);
+    },
+    getPayPeriod: function (payPeriod) {
+        var rentalType = "";
+        if (payPeriod == 3) {
+            rentalType = "季付";
+        }
+        else if (payPeriod == 6) {
+            rentalType = "半年付";
+        }
+        else if (payPeriod == 12) {
+            rentalType = "年付";
+        }
+        else if (payPeriod == 0) {
+            rentalType = "全额付";
+        }
+        else if (payPeriod == 1) {
+            rentalType = "月付";
+        }
+        else if (payPeriod == 2) {
+            rentalType = "两月一付";
+        }
+        return rentalType;
+    },
+    formatMM: function (date) {
+        return date.substring(5, 7);
+    },
+    getOrderType: function (orderType) {
+        switch (orderType) {
+            case "HouseRental":
+                return "房租金";
+            case "HouseDeposit":
+                return "房租押金";
+            case "AccessCardDeposit":
+                return "门禁卡押金";
+            case "ParkDeposit":
+                return "停车费押金";
+            case "OtherDeposit":
+                return "其他押金";
+            case "TenementFee":
+                return "物业费";
+            case "HotWaterFee":
+                return "热水费";
+            case "ColdWaterFee":
+                return "冷水费";
+            case "ElectricityFee":
+                return "电费";
+            case "ParkFee":
+                return "停车费";
+            case "LaundryFee":
+                return "洗衣费";
+            case "CleaningFee":
+                return "保洁费";
+            case "BroadBandFee":
+                return "宽带费";
+            case  "GasFee":
+                return "燃气费";
+            case  "TelevisionFee":
+                return "电视费";
+            case "ServiceFee":
+                return "服务费";
+            case "OtherFee":
+                return "其他费用";
+            case "Reservation":
+                return "预定金";
+        }
+    },
+    orderStateToLowerCase: function (orderState) {
+        return orderState.toLowerCase();
     }
 };
 module.exports = {
     formatPrice2: filter.formatPrice2,
-    roomSourcesPictures: filter.roomSourcesPictures
+    roomSourcesPictures: filter.roomSourcesPictures,
+    formatYYYMMDD: filter.formatYYYMMDD,
+    formatAmount: filter.formatAmount,
+    getPayPeriod: filter.getPayPeriod,
+    formatMM: filter.formatMM,
+    formatYYYMMDDHHMM: filter.formatYYYMMDDHHMM,
+    getOrderType: filter.getOrderType,
+    orderStateToLowerCase: filter.orderStateToLowerCase
 }

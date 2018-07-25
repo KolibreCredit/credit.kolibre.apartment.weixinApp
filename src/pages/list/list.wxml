@@ -1,0 +1,117 @@
+<!-- showToast -->
+<import src="../../utils/showToast.wxml"/>
+<template is="showToast" data="{{showToast: showToast}}"/>
+<!-- filter -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<!--pages/list/list.wxml-->
+<view class="container">
+    <view wx:if="{{!isNoData && confirmCount>0}}" class="listTip">
+        <image src="../../images/tip.png" style="width:14px;height:14px;margin-top:8px;margin-right:10px"/>
+        您有<span>{{confirmCount}}</span>个待确认租约
+    </view>
+    <view wx:if="{{!isNoData}}" class="{{confirmCount>0?'listLeases':''}}">
+        <view class="mui-table-view" wx:for="{{contracts}}">
+            <view class="mui-table-view-cell" style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)">
+                <view class="mui-media-body">
+                    <view class="mui-ellipsis">
+                        <span style='font-size:14px;color:#adadad'>创建日期：{{filter.formatYYYMMDD(item.createTime)}}</span>
+                        <span wx:if="{{item.confirmed && item.checkoutStatus == 'OnCheckout'}}" style="float:right"
+                              class="eviction">退租中</span>
+                        <span wx:elif="{{item.confirmed && item.isStaged}}" style="float:right"
+                              class="staged">已分期</span>
+                    </view>
+                </view>
+            </view>
+            <view class="mui-table-view-cell" style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)">
+                <view class="mui-media-body" bindtap="view" data-contractid="{{item.contractId}}">
+                    <view class="mui-ellipsis" style="font-size:18px;color:#646464;margin-top:10px">
+                        {{item.apartmentName}}
+                    </view>
+                    <view class="mui-ellipsis" style='font-size:16px;color:#777777'>
+                        <image src="../../images/iconroom.png"
+                               style="height:16px;width:16px;vertical-align:middle;margin-right:2px"/>
+                        {{item.roomNumber}}室
+                    </view>
+                    <view class="mui-ellipsis" style="font-size:16px;color:#646464">
+                        ¥{{filter.formatAmount(item.monthlyAmount)}}/月，按{{item.yueFu?"月付":filter.getPayPeriod(item.payPeriod)}}
+                    </view>
+                    <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                </view>
+            </view>
+            <view wx:if="{{!(item.confirmed && item.checkoutStatus=='Checkout')}}" class="mui-table-view-cell"
+                  style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)">
+                <view class="mui-media-body">
+                    <button wx:if="{{!item.confirmed}}" bindtap="contractConfirm" data-contractid="{{item.contractId}}"
+                            class="btnPay btnActive">确认租约
+                    </button>
+                    <button wx:if="{{item.confirmed && item.canYueFu}}" data-contractid="{{item.contractId}}"
+                            bindtap="showApply" class="btnPay btnActive" style='margin-left:10px'>申请月付
+                    </button>
+                    <button wx:if="{{item.confirmed && item.canStage}}" bindtap="staged"
+                            data-contractid="{{item.contractId}}" class="btnPay btnActive" style='margin-left:10px'>申请分期
+                    </button>
+                    <button wx:if="{{item.confirmed && item.checkoutStatus=='NotCheckout'}}"
+                            data-contractid="{{item.contractId}}" bindtap="eviction" class='btnEviction btnCancel'>申请退租
+                    </button>
+                    <button wx:if="{{item.confirmed && item.checkoutStatus=='OnCheckout'}}"
+                            data-contractid="{{item.contractId}}" bindtap="showQuash" class='btnQuash btnCancel'>取消退租
+                    </button>
+                </view>
+            </view>
+            <image wx:if="{{!item.confirmed}}" src="../../images/icon_queren.png" class="icon"/>
+            <image wx:if="{{item.confirmed && item.checkoutStatus=='Checkout'}}" src="../../images/icon_quash.png"
+                   class="icon"/>
+        </view>
+        <view style="height:60px"></view>
+    </view>
+    <view wx:if="{{isNoData}}" class="noData">
+        <view style="text-align:center">
+            <image src="../../images/nodata1.png" style="width:100px;height:100px"/>
+        </view>
+        <view style="margin-top:20px;font-size: 16px;color:#999999;text-align:center">
+            亲，您还没有租约哦
+        </view>
+        <view style="height:50px"></view>
+    </view>
+    <view wx:if="{{isApply}}" class="msg-post" style="padding:0 20px">
+        <view style="background:#FFFFFF;border-radius:6px;height:330px;position:relative;width:100%">
+            <view style="text-align:center">
+                <image src="../../images/mian.png" style="width:190px;height:170px"/>
+            </view>
+            <view style="font-size:20px;color:#646464;text-align:center;line-height:30px;margin-top:-15px">
+                月付房租，免手续费
+            </view>
+            <view style="font-size:20px;color:#646464;text-align:center;line-height:30px">
+                租房更轻松～
+            </view>
+            <view style="padding: 0 30px;margin-top:30px">
+                <button style="background-color:#ff8c14;border-radius:100px;height:40px;color:#ffffff;font-size:16px;width:100%;border:none"
+                        bindtap="createYueFuOrders" class="btnActive">确认申请
+                </button>
+            </view>
+            <image src="../../images/close.png" style="width:24px;height:24px;position: absolute;top:20px;right:20px"
+                   bindtap="hideApply"/>
+        </view>
+    </view>
+    <view wx:if="{{isQuash}}" class="msg-alert" style="padding:0 20px">
+        <view class="msg-body" style="height:auto;width:100%;background-color:#ffffff">
+            <view style="text-align:center;margin-top:30px">
+                <image src="../../images/leasemsg3.png" style="height:40px;width:40px"/>
+            </view>
+            <view style="margin-top:30px;font-size:16px;color:#646464;line-height:25px">
+                确定要取消该房间的退租操作？
+            </view>
+            <view style="margin-top:40px;text-align: center">
+                <button style="border:1px solid #ff8c14;border-radius:100px;height:38px;line-height:38px;color:#ff8c14;font-size:16px;width:110px;display:inline-block"
+                        bindtap="hideQuash">取消
+                </button>
+                <button style="background-color:#ff8c14;border-radius:100px;height:40px;color:#ffffff;font-size:16px;width:110px;border:none;margin-left:20px;display:inline-block"
+                        bindtap="cancelCheckoutApply" class="btnActive">确定
+                </button>
+            </view>
+            <view style="height:30px;clear:both">
+            </view>
+        </view>
+    </view>
+</view>
+<tabbar data="{{tabbar}}"></tabbar>

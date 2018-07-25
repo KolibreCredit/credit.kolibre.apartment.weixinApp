@@ -2,15 +2,22 @@
   "pages": [
     "pages/index/index",
     "pages/bill/bill",
-    "pages/lease/lease",
+    "pages/list/list",
+    "pages/index/detail",
     "pages/service/service",
     "pages/user/user",
-    "pages/index/detail"
+    "pages/user/login",
+    "pages/user/login2",
+    "pages/user/login3",
+    "pages/user/detail",
+    "pages/list/detail",
+    "pages/bill/detail",
+    "pages/user/user1"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "蜂鸟小屋",
+    "navigationBarTitleText": "蜂鸟屋",
     "navigationBarTextStyle": "black"
   }
 }

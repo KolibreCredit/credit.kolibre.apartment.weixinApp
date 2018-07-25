@@ -9,7 +9,7 @@ App({
     removeStorageSync: function (key) {
         wx.removeStorageSync(key);
     },
-    postRequest: function (apiUrl, data, cbSuccess, cbfail) {
+    postInvoke: function (apiUrl, data, cbSuccess, cbfail) {
         var auth = this.getStorageSync("X-KC-SID");
         wx.request({
             url: apiUrl,
@@ -19,31 +19,31 @@ App({
                 "X-KC-SID": auth
             },
             method: "POST",
-            success: function (res) {
-                if (res.statusCode == 200) {
-                    typeof cbSuccess == "function" && cbSuccess(res.data);
-                }
-                else {
-                    if (res.statusCode == 401) {
-                        wx.navigateTo({url: 'login'});
-                    } else if (res.statusCode == 400) {
+            success: function (wxRes) {
+                var res = wxRes.data;
+                if (res.succeeded) {
+                    typeof cbSuccess == "function" && cbSuccess(res);
+                } else {
+                    if (res.code == 130078401) {
+                        wx.navigateTo({url: '/pages/user/login'});
+                    } else if (res.code == 130078400) {
                         wx.showToast({
                             title: res.data.message,
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
-                    else if (res.statusCode == 403) {
+                    else if (res.code == 130078403) {
                         wx.showToast({
                             title: "无操作权限,请联系客服",
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
                     else {
                         wx.showToast({
                             title: "服务正在维护,请稍后",
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
@@ -53,14 +53,13 @@ App({
             fail: function () {
                 wx.showToast({
                     title: "网络链接异常,请稍后",
-                    image: "/images/err.png",
+                    image: "http://h.fengniaowu.com/loan/image/err.png",
                     duration: 2000
                 });
             }
         });
     },
-
-    getRequest: function (apiUrl, cbSuccess, cbfail) {
+    getInvoke: function (apiUrl, cbSuccess, cbfail) {
         var auth = this.getStorageSync("X-KC-SID");
         wx.request({
             url: apiUrl,
@@ -69,47 +68,47 @@ App({
                 "X-KC-SID": auth
             },
             method: "GET",
-            success: function (res) {
-                if (res.statusCode == 200) {
-                    typeof cbSuccess == "function" && cbSuccess(res.data);
-                }
-                else {
-                    if (res.statusCode == 401) {
-                        wx.navigateTo({url: 'login'});
-                    } else if (res.statusCode == 400) {
+            success: function (wxRes) {
+                var res = wxRes.data;
+                if (res.succeeded) {
+                    typeof cbSuccess == "function" && cbSuccess(res);
+                } else {
+                    if (res.code == 130078401) {
+                        wx.navigateTo({url: '/pages/user/login'});
+                    } else if (res.code == 130078400) {
                         wx.showToast({
                             title: res.data.message,
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
-                    else if (res.statusCode == 403) {
+                    else if (res.code == 130078403) {
                         wx.showToast({
                             title: "无操作权限,请联系客服",
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
                     else {
                         wx.showToast({
                             title: "服务正在维护,请稍后",
-                            image: "/images/err.png",
+                            image: "http://h.fengniaowu.com/loan/image/err.png",
                             duration: 2000
                         });
                     }
                     typeof cbfail == "function" && cbfail(res);
                 }
+
             },
             fail: function () {
                 wx.showToast({
                     title: "网络链接异常,请稍后",
-                    image: "/images/err.png",
+                    image: "http://h.fengniaowu.com/loan/image/err.png",
                     duration: 2000
                 });
             }
         });
     },
-
     postUploadFile: function (apiUrl, filePath, cbSuccess) {
         wx.uploadFile({
             url: apiUrl,
@@ -123,21 +122,20 @@ App({
                     var errInfo = JSON.parse(res.data);
                     wx.showToast({
                         title: errInfo.message,
-                        image: "/images/err.png",
+                        image: "http://h.fengniaowu.com/loan/image/err.png",
                         duration: 2000
                     });
                 }
             },
             fail: function (err) {
                 wx.showToast({
-                    title: err.errMsg,
-                    image: "/images/err.png",
+                    title: err.message,
+                    image: "http://h.fengniaowu.com/loan/image/err.png",
                     duration: 2000
                 });
             }
         });
     },
-
     stringFormat: function () {
         if (arguments.length == 0)
             return null;

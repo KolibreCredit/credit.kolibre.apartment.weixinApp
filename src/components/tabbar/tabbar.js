@@ -15,27 +15,27 @@ Component({
         change: function (e) {
             var index = e.currentTarget.dataset.index * 1;
             if (index == 0) {
-                wx.navigateTo({
+                wx.reLaunch({
                     url: '/pages/index/index'
                 });
             }
             else if (index == 1) {
-                wx.navigateTo({
-                    url: '/pages/lease/lease'
+                wx.reLaunch({
+                    url: '/pages/list/list'
                 });
             }
             else if (index == 2) {
-                wx.navigateTo({
+                wx.reLaunch({
                     url: '/pages/bill/bill'
                 });
             }
             else if (index == 3) {
-                wx.navigateTo({
+                wx.reLaunch({
                     url: '/pages/service/service'
                 });
             }
             else {
-                wx.navigateTo({
+                wx.reLaunch({
                     url: '/pages/user/user'
                 });
             }

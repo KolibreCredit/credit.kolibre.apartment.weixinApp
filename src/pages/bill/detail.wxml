@@ -1,0 +1,2 @@
+<!--pages/bill/detail.wxml-->
+<web-view src="{{detailWebAppUrl}}"></web-view>

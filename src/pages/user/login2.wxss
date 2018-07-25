@@ -1,0 +1,12 @@
+/* pages/user/login2.wxss */
+page {
+  background-image: url("  http://h.fengniaowu.com/images/login1.jpg");
+  background-size: cover;
+}
+
+input[type=text], input[type=password] {
+  padding: 5px;
+  border: 0;
+  margin-bottom: 0;
+  background: none;
+}

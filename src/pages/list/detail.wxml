@@ -1,0 +1,2 @@
+<!--pages/list/detail.wxml-->
+<web-view src="{{detailWebAppUrl}}"></web-view>

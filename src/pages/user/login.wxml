@@ -1,0 +1,29 @@
+<!-- showToast -->
+<import src="../../utils/showToast.wxml"/>
+<template is="showToast" data="{{showToast: showToast}}"/>
+<!--pages/user/login.wxml-->
+<view class="container">
+    <view style="padding-left:20px;padding-right:20px;padding-top:30px">
+        <view style="font-size:28px;color:#333333;height:30px;line-height:30px">
+            快速登录
+        </view>
+        <view style="font-size:16px;color:#333333;height:22px;line-height:22px;margin-top:16px">
+            欢迎进入交租平台
+        </view>
+        <view style="border-bottom:1px solid #d8d8d8;margin-top:30px;position:relative">
+            <input type="text" placeholder="请输入手机号" maxlength="11" bindinput="bindKeyInput"/>
+        </view>
+        <view style="text-align:center;margin-top:50px">
+            <button class="btnActive"
+                    style="background:#ff8c14;border-radius:44px;height:44px;color:#ffffff;font-size:18px;width:100%;border:none"
+                    bindtap="loginByCaptcha">下一步
+            </button>
+        </view>
+        <view style="margin-top:30px;font-size:16px;color:#646464;text-align:center">
+            <span bindtap="loginByPassword" style="text-decoration:none">密码登录</span>
+        </view>
+    </view>
+    <view class="footer" style="position:absolute;bottom: 30px;left:0;right:0;font-size: 14px;text-align:center">
+        <span style="color:#646464;text-decoration:none" bindtap="editorMobile2">更换手机号</span>
+    </view>
+</view>

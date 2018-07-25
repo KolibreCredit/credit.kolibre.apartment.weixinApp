@@ -1,3 +1,227 @@
+<!-- showToast -->
+<import src="../../utils/showToast.wxml"/>
+<template is="showToast" data="{{showToast: showToast}}"/>
+<!-- filter -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/bill/bill.wxml-->
-<text>pages/bill/bill.wxml</text>
+<view class="container">
+    <view style="position:fixed;width:100%;left:0;top:0;background:#ffffff;z-index:1">
+        <view class="selectTable">
+            <view class="tabItem {{tabIndex==0?'active':'' }}" data-index="0" bindtap="selectTab">
+                <span>未支付</span>
+            </view>
+            <view class="tabItem {{tabIndex==1?'active':''}}" data-index="1" bindtap="selectTab">
+                <span>已完成</span>
+            </view>
+        </view>
+        <view wx:if="{{tabIndex==0 && recentOrderAmount==0}}"
+              style="background:#F0F0F0;height: 30px;line-height:30px;font-size: 14px;color:#646464;padding-left:20px">
+            <image src="../../images/check1.png" style="height: 18px;width:18px;vertical-align:middle"/>
+            近{{recentDays}}日内无待支付账单
+        </view>
+        <view wx:if="{{tabIndex==0 && recentOrderAmount>0}}"
+              style="background:#fff1db;height: 30px;line-height:30px;font-size: 14px;color:#ff8c14;padding-left:20px">
+            <image src="../../images/tip.png" style="height: 18px;width:18px;vertical-align:middle"/>
+            近{{recentDays}}日有<span>{{recentOrderAmount}}</span>笔待支付账单
+        </view>
+    </view>
+    <view wx:if="{{!isNoData}}" class="billList {{tabIndex==0?'active':''}}">
+        <block wx:for="{{orders}}">
+            <block wx:if="{{item.orderState=='Created'}}">
+                <view class="billItem {{item.isCurrent?'created':''}}">
+                    <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
+                        <image class="month"
+                               src="../../images/months/{{filter.formatMM(item.paymentTime)}}{{item.isCurrent?'s.png':'.png'}}"/>
+                        到期日：{{filter.formatYYYMMDD(item.paymentTime)}}
+                        <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                        <span class="state">{{item.isCurrent?"待支付":"未支付"}}</span>
+                    </view>
+                    <view class="billType">
+                        <view class="col2">
+                            <span>{{item.roomNumber}}</span>
+                            <span wx:if="{{item.orderType=='CustomDeposit'}}"
+                                  style="padding:0 5px;border-left:2px solid #e9e9e9">{{tem.orderTypeName}}</span>
+                            <span wx:else style="padding:0 5px;border-left:2px solid #e9e9e9">{{filter.getOrderType(item.orderType)}}</span>
+                            <span style="padding-left:10px;border-left:2px solid #e9e9e9">{{item.apartmentName}}</span>
+                        </view>
+                        <view class="col3">
+                            {{item.paidAmount==0?"":'¥'+filter.formatAmount(item.totalAmount)}}
+                        </view>
+                    </view>
+                    <view class="billPayContent">
+                        ¥{{item.paidAmount==0?filter.formatAmount(item.totalAmount):filter.formatAmount(item.totalAmount-item.paidAmount)}}
+                        <span wx:if="{{item.serviceCharge > 0 && item.penaltyAmount>0}}"
+                              style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费、{{filter.formatAmount(item.penaltyAmount)}}元违约金)}</span>
+                        <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
+                        <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
+                        <span class="treat">待</span>
+                        <span class="stage" wx:if="{{item.orderModel == 'Staging'}}">分</span>
+                    </view>
+                    <view class="bottom">
+                        <span class="billbtnPay btnActive" wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}"
+                              bindtap="createTransaction">立即支付</span>
+                        <span class="billbtnNotPay" wx:else>立即支付</span>
+                        <block wx:if="{{item.canStage}}">
+                            <span wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}" class="billbtnStage"
+                                  bindtap="createStage">申请分期</span>
+                            <span wx:else class="billbtnNotStage">申请分期</span>
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{item.orderState=='ApproachingOverdue'}}">
+                <view class="billItem approachingoverdue}}">
+                    <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
+                        <image class="month" src="../../images/months/{{filter.formatMM(item.paymentTime)}}s.png"/>
+                        到期日：{{filter.formatYYYMMDD(item.paymentTime)}}
+                        <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                        <span class="state">快到期</span>
+                    </view>
+                    <view class="billType">
+                        <view class="col2">
+                            <span>{{item.roomNumber}}</span>
+                            <span wx:if="{{item.orderType=='CustomDeposit'}}"
+                                  style="padding:0 5px;border-left:2px solid #e9e9e9">{{tem.orderTypeName}}</span>
+                            <span wx:else style="padding:0 5px;border-left:2px solid #e9e9e9">{{filter.getOrderType(item.orderType)}}</span>
+                            <span style="padding-left:10px;border-left:2px solid #e9e9e9">{{item.apartmentName}}</span>
+                        </view>
+                        <view class="col3">
+                            {{item.paidAmount==0?"":'¥'+filter.formatAmount(item.totalAmount)}}
+                        </view>
+                    </view>
+                    <view class="billPayContent">
+                        ¥{{item.paidAmount==0?filter.formatAmount(item.totalAmount):filter.formatAmount(item.totalAmount-item.paidAmount)}}
+                        <span wx:if="{{item.serviceCharge > 0 && item.penaltyAmount>0}}"
+                              style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费、{{filter.formatAmount(item.penaltyAmount)}}元违约金)}</span>
+                        <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
+                        <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
+                        <span class="treat">待</span>
+                        <span class="stage" wx:if="{{item.orderModel == 'Staging'}}">分</span>
+                    </view>
+                    <view class="bottom">
+                        <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}" bindtap="createTransaction">立即支付</span>
+                        <block wx:if="{{item.canStage}}">
+                            <span wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}" class="billbtnStage"
+                                  bindtap="createStage">申请分期</span>
+                            <span wx:else class="billbtnNotStage">申请分期</span>
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{item.orderState=='Overdue'}}">
+                <view class="billItem overdue}}">
+                    <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
+                        <image class="month" src="../../images/months/{{filter.formatMM(item.paymentTime)}}s.png"/>
+                        到期日：{{filter.formatYYYMMDD(item.paymentTime)}}
+                        <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                        <span class="state">已逾期</span>
+                    </view>
+                    <view class="billType">
+                        <view class="col2">
+                            <span>{{item.roomNumber}}</span>
+                            <span wx:if="{{item.orderType=='CustomDeposit'}}"
+                                  style="padding:0 5px;border-left:2px solid #e9e9e9">{{tem.orderTypeName}}</span>
+                            <span wx:else style="padding:0 5px;border-left:2px solid #e9e9e9">{{filter.getOrderType(item.orderType)}}</span>
+                            <span style="padding-left:10px;border-left:2px solid #e9e9e9">{{item.apartmentName}}</span>
+                        </view>
+                        <view class="col3">
+                            {{item.paidAmount==0?"":'¥'+filter.formatAmount(item.totalAmount)}}
+                        </view>
+                    </view>
+                    <view class="billPayContent">
+                        ¥{{item.paidAmount==0?filter.formatAmount(item.totalAmount):filter.formatAmount(item.totalAmount-item.paidAmount)}}
+                        <span wx:if="{{item.serviceCharge > 0 && item.penaltyAmount>0}}"
+                              style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费、{{filter.formatAmount(item.penaltyAmount)}}元违约金)}</span>
+                        <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
+                        <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
+                        <span class="treat">待</span>
+                        <span class="stage" wx:if="{{item.orderModel == 'Staging'}}">分</span>
+                    </view>
+                    <view class="bottom">
+                        <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}" bindtap="createTransaction">立即支付</span>
+                        <block wx:if="{{item.canStage}}">
+                            <span wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}" class="billbtnStage"
+                                  bindtap="createStage">申请分期</span>
+                            <span wx:else class="billbtnNotStage">申请分期</span>
+                        </block>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{item.orderState=='Paid'}}">
+                <view class="billItem paid}}">
+                    <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
+                        <image class="month"
+                               src="../../images/months/{{filter.formatMM(item.actualPaymentTime)}}s.png"/>
+                        支付时间：{{filter.formatYYYMMDDHHMM(item.actualPaymentTime)}}
+                        <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                        <span class="state">已支付</span>
+                    </view>
+                    <view class="billType">
+                        <view class="col2">
+                            <span>{{item.roomNumber}}</span>
+                            <span wx:if="{{item.orderType=='CustomDeposit'}}"
+                                  style="padding:0 5px;border-left:2px solid #e9e9e9">{{tem.orderTypeName}}</span>
+                            <span wx:else style="padding:0 5px;border-left:2px solid #e9e9e9">{{filter.getOrderType(item.orderType)}}</span>
+                            <span style="padding-left:10px;border-left:2px solid #e9e9e9">{{item.apartmentName}}</span>
+                        </view>
+                        <view class="col3">
+                        </view>
+                    </view>
+                    <view class="billPayContent">
+                        ¥{{filter.formatAmount(item.totalAmount)}}
+                        <span wx:if="{{item.serviceCharge > 0 && item.penaltyAmount>0}}"
+                              style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费、{{filter.formatAmount(item.penaltyAmount)}}元违约金)}</span>
+                        <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
+                        <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
+                    </view>
+                    <view class="bottom">
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{item.orderState=='Canceled'}}">
+                <view class="billItem canceled}}">
+                    <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
+                        <image class="month" src="../../images/months/{{filter.formatMM(item.checkoutTime)}}.png"/>
+                        退租日期：{{filter.formatYYYMMDD(item.paymentTime)}}
+                        <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+                        <span class="state">已取消</span>
+                    </view>
+                    <view class="billType">
+                        <view class="col2">
+                            <span>{{item.roomNumber}}</span>
+                            <span wx:if="{{item.orderType=='CustomDeposit'}}"
+                                  style="padding:0 5px;border-left:2px solid #e9e9e9">{{tem.orderTypeName}}</span>
+                            <span wx:else style="padding:0 5px;border-left:2px solid #e9e9e9">{{filter.getOrderType(item.orderType)}}</span>
+                            <span style="padding-left:10px;border-left:2px solid #e9e9e9">{{item.apartmentName}}</span>
+                        </view>
+                        <view class="col3">
+                        </view>
+                    </view>
+                    <view class="billPayContent">
+                        ¥{{filter.formatAmount(item.totalAmount)}}
+                        <span wx:if="{{item.serviceCharge > 0 && item.penaltyAmount>0}}"
+                              style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费、{{filter.formatAmount(item.penaltyAmount)}}元违约金)}</span>
+                        <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
+                        <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
+                    </view>
+                    <view class="bottom">
+                    </view>
+                </view>
+            </block>
+        </block>
+        <view style="height:50px"></view>
+    </view>
+    <div wx:if="{{isNoData}}" class="noData" style="width:100%">
+        <view style="text-align:center">
+            <image style="width:283px;height:245px" src="../../images/ic_nodata.png"/>
+        </view>
+        <view wx:if="{{tabIndex==0}}" style="font-size:16px;color:#999999">
+            亲，本期账单已支付完成
+        </view>
+        <view wx:else style="font-size:16px; color:#999999">
+            亲，您没有已完成账单
+        </view>
+        <view style="height:50px"></view>
+    </div>
+</view>
 <tabbar bindchange="tabChange" data="{{tabbar}}"></tabbar>

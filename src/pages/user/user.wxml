@@ -1,13 +1,15 @@
 <!--pages/user/user.wxml-->
 <import src="../../utils/wxStar.wxml"/>
 <view class="container">
-    <view class="bgImg"></view>
+    <image class="bgImg" src="../../images/user.png"></image>
     <view class="userInfoDiv">
-        <view style="margin-top:40px;height:22px"><span class="userName" id="lbRealName"></span></view>
-        <view style="height:30px;margin-top:10px"><span class="accountNo" id="lbCellphone"></span></view>
+        <view style="margin-top:30px;height:22px"><span class="userName">{{tenant.realName}}</span>
+        </view>
+        <view style="height:30px;margin-top:15px"><span class="accountNo">{{tenant.cellphone}}</span>
+        </view>
         <image src="../../images/ic_userImg.png"/>
     </view>
-    <view style="font-size:14px;color:#666666;text-align:center;display:flex">
+    <view style="font-size:14px;color:#666666;text-align:center;display:flex;line-height:24px;justify-content:center">
         <view>
             信用等级
         </view>
@@ -17,27 +19,36 @@
     </view>
     <view style="background-color:#ffffff">
         <view class="userManageList">
-            <view>
-                <a class="item1" href="list.html">
-                    我的租约<span style="font-size:16px;color:#333333;position: absolute;right:50px">待处理<span
+            <view class="item" bindtap="list">
+                <image src="../../images/list.png" class="icon"></image>
+                <text>我的租约</text>
+                <span wx:if="{{unConfirmedContractCount>0}}"
+                      style="font-size:16px;color:#333333;position: absolute;right:50px">待处理<span
                         style="background:#ff0100;width:7px;height:7px;border-radius:100%;display:inline-block;margin-left:5px"></span></span>
-                </a>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
-            <view>
-                <a class="item2" onclick="bill()" style="border-bottom: none">我的账单</a>
+            <view class="item" bindtap="bill">
+                <image src="../../images/bill.png" class="icon"/>
+                <text>我的账单</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
-            <view style="height:10px;background:#f8f8f8">
+            <view class="item" bindtap="credit">
+                <image src="../../images/credit.png" class="icon"/>
+                <text>信用管理</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
-            <view>
-                <a class="item3" href="credit.html">信用管理</a>
+            <view class="item" bindtap="fuwu">
+                <image src="../../images/fuwu.png" class="icon"/>
+                <text>生活服务</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
-            <view>
-                <a class="item5" href="fuwu.html">生活服务</a>
-            </view>
-            <view>
-                <a class="item4" href="user1.html" style=" border-bottom: none">个人设置</a>
+            <view class="item" style="border-bottom: none" bindtap="shezhi">
+                <image src="../../images/shezhi.png" class="icon"/>
+                <text>个人设置</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
         </view>
     </view>
+    <view style="height:80px"></view>
 </view>
 <tabbar data="{{tabbar}}"></tabbar>

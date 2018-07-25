@@ -1,0 +1,33 @@
+/* pages/user/login.wxss */
+page {
+  background-image: url("  http://h.fengniaowu.com/images/login1.jpg");
+  background-size: cover;
+}
+
+input[type=text], input[type=password] {
+  padding: 5px;
+  border: 0;
+  margin-bottom: 0;
+  background: none;
+}
+
+.mui-content {
+  width: 100%;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.footer {
+  display: block;
+}
+
+@media (max-height: 400px) {
+  .footer {
+    display: none;
+  }
+}

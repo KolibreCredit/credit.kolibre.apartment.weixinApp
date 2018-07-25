@@ -64,7 +64,7 @@ Page({
             forceRefresh: forceRefresh
         };
         var that = this;
-        app.postRequest(config.URLS.GETROOMSOURCES, data, function (res) {
+        app.postInvoke(config.URLS.GETROOMSOURCES, data, function (res) {
             if (res.succeeded) {
                 that.setData({
                     cities: ["不限"].concat(res.data.cities),
