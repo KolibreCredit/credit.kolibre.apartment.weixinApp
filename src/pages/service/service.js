@@ -1,14 +1,19 @@
 // pages/service/service.js
 const tabbar = require('../tabbar');
+const constants = require('../../config');
+const app = getApp();
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-        tabbar: null
+        tabbar: null,
+        isNoData: false,
+        tabIndex: 0,
+        cleanings: null,
+        repairs: null,
+        complaintSuggestions: null
     },
-
     /**
      * 生命周期函数--监听页面加载
      */
@@ -17,54 +22,117 @@ Page({
         this.setData({
             tabbar: tabbar
         });
+        this.getTenantCleanings();
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    selectTab: function (e) {
+        var index = e.currentTarget.dataset.index * 1;
+        if (this.data.tabIndex != index) {
+            this.setData({tabIndex: index});
+            if (index == 0) {
+                this.getTenantCleanings();
+            }
+            else if (index == 1) {
+                this.getTenantRepairs();
+            }
+            else {
+                this.getTenantComplaintSuggestions();
+            }
+        }
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    list2: function (e) {
+        var index = e.currentTarget.dataset.index;
+        wx.navigateTo({
+            url: '/pages/service/detail?key=list2&tabIndex=' + index
+        });
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    getTenantCleanings: function () {
+        var that = this;
+        app.getInvoke(constants.URLS.GETTENANTCLEANINGS, function (res) {
+            if (res.succeeded) {
+                if (res.data.length == 0) {
+                    that.setData({
+                        isNoData: true,
+                        cleanings: null
+                    });
+                } else {
+                    that.setData({
+                        isNoData: false,
+                        cleanings: res.data
+                    });
+                }
+            }
+        }, function (err) {
+            that.setData({
+                isNoData: true,
+                cleanings: null
+            });
+            console.log(err.message);
+        });
     },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
+    viewCleanings: function (e) {
+        var cleaningid = e.currentTarget.dataset.cleaningid;
+        wx.navigateTo({
+            url: '/pages/service/detail?key=viewbaoji&cleaningId=' + cleaningid
+        });
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
+    getTenantRepairs: function () {
+        var that = this;
+        app.getInvoke(constants.URLS.GETTENANTREPAIRS, function (res) {
+            if (res.succeeded) {
+                if (res.data.length == 0) {
+                    that.setData({
+                        isNoData: true,
+                        repairs: null
+                    });
+                } else {
+                    that.setData({
+                        isNoData: false,
+                        repairs: res.data
+                    });
+                }
+            }
+        }, function (err) {
+            that.setData({
+                isNoData: true,
+                repairs: null
+            });
+            console.log(err.message);
+        });
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
+    viewRepair: function (e) {
+        var repairId = e.currentTarget.dataset.repairid;
+        wx.navigateTo({
+            url: '/pages/service/detail?key=viewbaoxiu&repairId=' + repairId
+        });
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    getTenantComplaintSuggestions: function () {
+        var that = this;
+        app.getInvoke(constants.URLS.GETTENANTCOMPLAINTSUGGESTIONS, function (res) {
+            if (res.succeeded) {
+                if (res.data.length == 0) {
+                    that.setData({
+                        isNoData: true,
+                        complaintSuggestions: null
+                    });
+                } else {
+                    that.setData({
+                        isNoData: false,
+                        complaintSuggestions: res.data
+                    });
+                }
+            }
+        }, function (err) {
+            that.setData({
+                isNoData: true,
+                complaintSuggestions: null
+            });
+            console.log(err.message);
+        });
+    },
+    viewTousu: function (e) {
+        var complaintSuggestionId = e.currentTarget.dataset.complaintsuggestionid;
+        wx.navigateTo({
+            url: '/pages/service/detail?key=viewtousu&complaintSuggestionId=' + complaintSuggestionId
+        });
     }
 })

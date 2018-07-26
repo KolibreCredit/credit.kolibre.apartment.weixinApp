@@ -1,3 +1,135 @@
+<!-- filter -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/service/service.wxml-->
-<text>pages/service/service.wxml</text>
+<view class="container">
+    <view style="position:relative">
+        <view style="height:180px">
+            <image src="../../images/fuwu/fuwu.png" style="height:180px;width:100%"/>
+        </view>
+        <view style="height:100px;background:#ffffff">
+        </view>
+        <span style="position:absolute;left:20px;top:30px;font-size:18px;color:#ffffff">
+            在线服务
+        </span>
+        <view data-index="2" bindtap="list2"
+              style="position:absolute;top:30px;right:20px;display:inline-block;background:rgba(255,255,255,0.9);border-radius:100px;width:100px;height:24px;line-height: 24px;font-size:12px;color:#646464;text-align:center">
+            <image src="../../images/fuwu/tousu.png" style="height:12px;width:12px;margin-right:5px"/>
+            投诉建议
+        </view>
+        <view style="position:absolute;top:80px;left:20px;right:20px;background:#FFFFFF;box-shadow:0 2px 20px 0 rgba(0,0,0,0.10);border-radius:6px;height:136px;z-index:1">
+            <view style="display: flex;flex-direction:row;align-items:center;height:136px">
+                <view style="width:49%;text-align: center" data-index="0" bindtap="list2">
+                    <image src="../../images/fuwu/baoji.png" style="width: 60px;height:60px"/>
+                    <view style="font-size:16px;color:#646464">
+                        申请保洁
+                    </view>
+                </view>
+                <view style="width:2%">
+                    <image src="../../images/fuwu/line.png" style="width:2px;height:52px"/>
+                </view>
+                <view style="width:49%;text-align:center" data-index="1" bindtap="list2">
+                    <image src="../../images/fuwu/baoxiu.png" style="width: 60px;height:60px"/>
+                    <view style="font-size:16px;color:#646464">
+                        立即报修
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="position:absolute;left:0;right:0;bottom:0;background:#ffffff">
+            <view class="selectTable">
+                <view class="item {{tabIndex==0?'active':''}}" bindtap="selectTab" data-index="0"><span>保洁记录</span>
+                </view>
+                <view class="item {{tabIndex==1?'active':''}}" bindtap="selectTab" data-index="1"><span>报修记录</span>
+                </view>
+                <view class="item {{tabIndex==2?'active':''}}" bindtap="selectTab" data-index="2"><span>投诉建议</span>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{tabIndex==0}}">
+        <view class="billItem" wx:for="{{cleanings}}">
+            <view class="content0">
+                <view>
+                    申请时间：{{filter.formatYYYMMDDHHMM(item.createTime)}}<span class="{{item.cleaningState}}">{{filter.getCleaningState(item.cleaningState)}}</span>
+                </view>
+            </view>
+            <view class="content1" data-cleaningid="{{item.cleaningId}}" bindtap="viewCleanings">
+                <view style="font-size:18px;color:#646464;line-height: 40px;height:40px">
+                    {{item.apartmentName}}
+                </view>
+                <view style="font-size:16px;color:#777777;line-height:32px;height:32px">
+                    <image class="i-room" src="../../images/fuwu/iroom.png"/>
+                    <span>{{item.roomNumber}}</span>室
+                    <image class="iType" src="../../images/fuwu/ibaoji.png"/>
+                    <span>{{filter.getCleaningTypes(item.cleaningType)}}</span>
+                </view>
+                <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+            </view>
+            <view class="content2" style="margin-top:5px">
+                <view style="border-radius:0 15px 15px 0;background: rgba(0,0,0,0.04);display:inline-block;padding-left:20px;padding-right:10px;line-height:30px;font-size: 14px;color:#333333">
+                    上门时段：<span
+                        style="margin-left:5px">{{filter.formatYYYMMDDHHMM(item.cleaningStartTime)}}</span>～<span>{{filter.formatHHMM(item.cleaningEndTime)}}</span>
+                </view>
+            </view>
+        </view>
+        <view style="height:60px"></view>
+    </view>
+    <view class="list" wx:if="{{tabIndex==1}}">
+        <view class="billItem" wx:for="{{repairs}}">
+            <view class="content0">
+                <view>
+                    申请时间：{{filter.formatYYYMMDDHHMM(item.createTime)}}<span class="{{item.repairState}}">{{filter.getCleaningState(item.repairState)}}</span>
+                </view>
+            </view>
+            <view class="content1" data-repairid="{{item.repairId}}" bindtap="viewRepair">
+                <view style="font-size:18px;color:#646464;line-height: 40px;height:40px">
+                    {{item.apartmentName}}
+                </view>
+                <view style="font-size:16px;color:#777777;height:32px;line-height:32px">
+                    <image class="i-room" src="../../images/fuwu/iroom.png"/>
+                    <span>{{item.roomNumber}}</span>室
+                    <image class="iType" src="../../images/fuwu/ibaoxiu.png"/>
+                    <span>{{filter.getRepairType(item.repairType)}}</span>
+                </view>
+                <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
+            </view>
+            <view class="content2" style="margin-top:5px">
+                <view style="border-radius:0 15px 15px 0;background: rgba(0,0,0,0.04);display:inline-block;padding-left:20px;padding-right:10px;line-height:30px;font-size: 14px;color:#333333">
+                    上门时段：<span style="margin-left:5px">{{filter.formatYYYMMDDHHMM(item.repairStartTime)}}</span>～<span>{{filter.formatHHMM(item.repairEndTime)}}</span>
+                </view>
+            </view>
+        </view>
+        <view style="height:60px"></view>
+    </view>
+    <view class="list" wx:if="{{tabIndex==2}}">
+        <view class="billItem" wx:for="{{complaintSuggestions}}">
+            <view class="content0">
+                <view>
+                    申请时间：{{filter.formatYYYMMDDHHMM(item.createTime)}}<span class="{{item.complaintSuggestionState}}">{{filter.getCleaningState(item.complaintSuggestionState)}}</span>
+                </view>
+            </view>
+            <view class="content1" data-complaintSuggestionId="{{item.complaintSuggestionId}}" bindtap="viewTousu">
+                <view style="font-size:18px;color:#646464;line-height: 40px;height:40px">
+                    {{item.apartmentName}}
+                </view>
+                <view style="font-size:16px;color:#777777;height:32px;line-height:32px">
+                    <image class="i-room" src="../../images/fuwu/iroom.png"/>
+                    <span>{{item.roomNumber}}</span>室
+                    <image class="iType" src="../../images/fuwu/itousu.png"/>
+                    <span class="tousuContent">{{item.complaintSuggestionContent}}</span>
+                </view>
+                <image class="ic_grey_arrow" style="top:35px" src="../../images/ic_grey_arrow.png"/>
+            </view>
+        </view>
+        <view style="height:60px"></view>
+    </view>
+    <view class="noData" wx:if="{{isNoData}}">
+        <view style="text-align:center">
+            <image style="width:60px;height:60px" src="../../images/fuwu/ic_nodata.png"/>
+        </view>
+        <view style="font-size: 16px; color: #999999;margin-top:20px">
+            暂无记录
+        </view>
+    </view>
+</view>
 <tabbar data="{{tabbar}}"></tabbar>

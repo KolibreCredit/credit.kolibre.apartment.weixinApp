@@ -49,6 +49,6 @@
             </view>
         </view>
     </view>
-    <view style="height:80px"></view>
+    <view style="height:60px"></view>
 </view>
 <tabbar data="{{tabbar}}"></tabbar>

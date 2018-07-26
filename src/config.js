@@ -10,7 +10,10 @@ var config = {
         GETCURRENTCONTRACTS: "http://kc-fengniaowu-talos.kolibre.credit/api/Contract/GetCurrentContracts",
         CREATEYUEFUORDERS: "http://kc-fengniaowu-talos.kolibre.credit/api/Order/CreateYueFuOrders",
         CANCELCHECKOUTAPPLY: "http://kc-fengniaowu-talos.kolibre.credit/api/Contract/CancelCheckoutApply",
-        QUERYALLORDERS: "http://kc-fengniaowu-talos.kolibre.credit/api/Order/QueryAllOrders?orderState="
+        QUERYALLORDERS: "http://kc-fengniaowu-talos.kolibre.credit/api/Order/QueryAllOrders?orderState=",
+        GETTENANTCLEANINGS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantCleanings",
+        GETTENANTREPAIRS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantRepairs",
+        GETTENANTCOMPLAINTSUGGESTIONS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantComplaintSuggestions"
     },
     REGEX: {
         CELLPHONE: /^(13|14|15|16|17|18|19|10)\d{9}$/,
@@ -110,7 +113,8 @@ var config = {
         pictureUrls: "请上传图片资料",
         cleaningType: "请选择保洁类型",
         cancelCleaning: "取消成功",
-        shortLink: "短链创建成功"
+        shortLink: "短链创建成功",
+        loginOut:"退出成功"
     }
 };
 

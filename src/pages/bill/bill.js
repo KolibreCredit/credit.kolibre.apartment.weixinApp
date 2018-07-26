@@ -73,8 +73,6 @@ Page({
             this.setData({tabIndex: index});
             this.findAllLeaseOrder(index);
         }
-        console.log(index);
-        console.log(this.data.tabIndex + 'a');
     },
     view: function (e) {
         var orderId = e.currentTarget.dataset.orderid;

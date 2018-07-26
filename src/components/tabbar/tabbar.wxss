@@ -15,6 +15,7 @@
 }
 
 .c_tabbar .tabbar_item {
+  width: 20%;
   font-size: 12px;
   display: flex;
   flex-direction: column;
@@ -42,19 +43,16 @@
   position: absolute;
   top: -25px;
 }
-
 .c_tabbar .tabbar_item_img.shadow {
   -moz-box-shadow: 0px 0px 20 rpx rgba(0, 0, 0, 0.06);
   -webkit-box-shadow: 0px 0px 20 rpx rgba(0, 0, 0, 0.06);
   box-shadow: 0px 0px 20 rpx rgba(0, 0, 0, 0.06);
 }
-
 .c_tabbar .tabbar_item_img.circle {
   border-radius: 50%;
   position: absolute;
   z-index: 9;
 }
-
 .tabbar_item_title {
   position: absolute;
   bottom: 5px;

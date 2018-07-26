@@ -209,7 +209,7 @@
                 </view>
             </block>
         </block>
-        <view style="height:50px"></view>
+        <view style="height:60px"></view>
     </view>
     <div wx:if="{{isNoData}}" class="noData" style="width:100%">
         <view style="text-align:center">

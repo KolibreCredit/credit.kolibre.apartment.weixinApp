@@ -1,1 +1,42 @@
 /* pages/user/user1.wxss */
+page {
+  background: #f8f8f8;
+}
+
+.userManageList {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+.userManageList .item {
+  list-style: none;
+  height: 60px;
+  width: 100%;
+  padding-left: 20px;
+  position: relative;
+}
+
+.item view {
+  display: block;
+  position: relative;
+  font-size: 16px;
+  color: #646464;
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+}
+.ic_grey_arrow {
+  position: absolute;
+  right: 30px;
+  top: 21px;
+  width: 18px;
+  height: 18px;
+}
+.loginOut {
+  margin-top: 70px;
+  padding: 0 20px;
+}

@@ -123,7 +123,7 @@
                     </view>
                 </view>
             </view>
-            <view wx:if="{{filterRooms.length>2}}" style="height:50px"></view>
+            <view style="height:60px"></view>
         </view>
     </scroll-view>
     <view wx:else class="errData">

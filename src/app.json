@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/user/user1",
     "pages/bill/bill",
     "pages/list/list",
     "pages/index/detail",
-    "pages/service/service",
     "pages/user/user",
     "pages/user/login",
     "pages/user/login2",
@@ -12,7 +12,8 @@
     "pages/user/detail",
     "pages/list/detail",
     "pages/bill/detail",
-    "pages/user/user1"
+    "pages/service/detail",
+    "pages/service/service"
   ],
   "window": {
     "backgroundTextStyle": "light",

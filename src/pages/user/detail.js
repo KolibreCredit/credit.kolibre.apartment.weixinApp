@@ -14,34 +14,30 @@ Page({
             this.setData({
                 detailWebAppUrl: "http://h.fengniaowu.com/editorMobile2.html"
             });
-        } else if (options.key == "list") {
-            this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/list.html"
-            });
-        }
-        else if (options.key == "bill") {
-            this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/bill.html"
-            });
         }
         else if (options.key == "credit") {
             this.setData({
                 detailWebAppUrl: "http://h.fengniaowu.com/credit.html"
             });
         }
-        else if (options.key == "fuwu") {
+        else if (options.key == "photo") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/fuwu.html"
-            });
-        }
-        else if (options.key == "user1") {
-            this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/user1.html"
+                detailWebAppUrl: "http://h.fengniaowu.com/photo.html"
             });
         }
         else if (options.key == "resetPassword") {
             this.setData({
                 detailWebAppUrl: "http://h.fengniaowu.com/resetPassword.html"
+            });
+        }
+        else if (options.key == "verify") {
+            this.setData({
+                detailWebAppUrl: "http://h.fengniaowu.com/verify.html"
+            });
+        }
+        else if (options.key == "editorMobile") {
+            this.setData({
+                detailWebAppUrl: "http://h.fengniaowu.com/editorMobile.html"
             });
         }
     }
