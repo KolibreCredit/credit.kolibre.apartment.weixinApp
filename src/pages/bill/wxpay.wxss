@@ -1,0 +1,77 @@
+/* pages/bill/wxpay.wxss */
+page {
+  padding: 0;
+  margin: 0;
+  background-color: #EFF3F6;
+  font-family: 'HiraginoSansGB W3', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+}
+
+.title {
+  padding-right: 20px;
+  font-size: 16px;
+  color: #666666;
+  border: 0;
+  text-align: left;
+  line-height: 30px;
+}
+
+.title2 {
+  padding-right: 20px;
+  font-size: 12px;
+  color: #999999;
+  border: 0;
+  text-align: left;
+  line-height: 30px;
+}
+
+.title span {
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+}
+
+.title2 label {
+  font-size: 14px;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+}
+
+.row {
+  height: 40px;
+  font-size: 24px;
+  color: #646464;
+  text-align: center;
+  line-height: 40px;
+}
+
+.row2 {
+  height: 20px;
+  font-size: 16px;
+  color: #7f8fa4;
+  text-align: center;
+  line-height: 20px;
+  padding-bottom: 10px;
+}
+
+.btnPay {
+  width: 100%;
+  height: 44px;
+  border-radius: 20px;
+  background-color: #ff8c14;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  -webkit-appearance: none;
+}
+
+.btnPay:active {
+  background: #fa7d20 !important;
+  box-shadow: 0 2px 6px 0 rgba(251, 146, 40, 0.70);
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+}

@@ -17,13 +17,13 @@
             <template is="wxStar" data="{{wxStar: wxStar}}"/>
         </view>
     </view>
-    <view style="background-color:#ffffff">
+    <view style="background-color:#ffffff;padding:0 20px">
         <view class="userManageList">
             <view class="item" bindtap="list">
                 <image src="../../images/list.png" class="icon"></image>
                 <text>我的租约</text>
                 <span wx:if="{{unConfirmedContractCount>0}}"
-                      style="font-size:16px;color:#333333;position: absolute;right:50px">待处理<span
+                      style="font-size:16px;color:#333333;position:absolute;right:25px">待处理<span
                         style="background:#ff0100;width:7px;height:7px;border-radius:100%;display:inline-block;margin-left:5px"></span></span>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>

@@ -89,7 +89,7 @@ Page({
     createTransaction: function (e) {
         var orderId = e.currentTarget.dataset.orderid;
         wx.navigateTo({
-            url: '/pages/bill/detail?key=apppay&orderId=' + orderId
+            url: '/pages/bill/wxpay?orderId=' + orderId
         });
     }
 })

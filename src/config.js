@@ -1,19 +1,24 @@
 var config = {
     URLS: {
-        GETROOMSOURCES: "https://kc-fengniaowu-talos.kolibre.credit/api/Room/GetRoomSources",
-        GETCURRENTTENANT: "http://kc-fengniaowu-talos.kolibre.credit/api/Tenant/GetCurrentTenant",
-        GETUNCONFIRMEDCONTRACTCOUNT: "http://kc-fengniaowu-talos.kolibre.credit/api/Contract/GetUnConfirmedContractCount",
-        SEND: "http://kc-fengniaowu-talos.kolibre.credit/api/ValidateCode/Send",
-        VERIFY: "http://kc-fengniaowu-talos.kolibre.credit/api/ValidateCode/Verify",
-        QUICKLOGIN: "http://kc-fengniaowu-talos.kolibre.credit/api/ValidateCodeLogin/Tenant/QuickLogin",
-        LOGINBYPASSWORD: "http://kc-fengniaowu-talos.kolibre.credit/api/PasswordLogin/Tenant/Login",
-        GETCURRENTCONTRACTS: "http://kc-fengniaowu-talos.kolibre.credit/api/Contract/GetCurrentContracts",
-        CREATEYUEFUORDERS: "http://kc-fengniaowu-talos.kolibre.credit/api/Order/CreateYueFuOrders",
-        CANCELCHECKOUTAPPLY: "http://kc-fengniaowu-talos.kolibre.credit/api/Contract/CancelCheckoutApply",
-        QUERYALLORDERS: "http://kc-fengniaowu-talos.kolibre.credit/api/Order/QueryAllOrders?orderState=",
-        GETTENANTCLEANINGS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantCleanings",
-        GETTENANTREPAIRS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantRepairs",
-        GETTENANTCOMPLAINTSUGGESTIONS: "http://kc-fengniaowu-talos.kolibre.credit/api/DomesticService/GetTenantComplaintSuggestions"
+        GETROOMSOURCES: "https://kc-talos.fengniaowu.com:4431/api/Room/GetRoomSources",
+        GETCURRENTTENANT: "https://kc-talos.fengniaowu.com:4431/api/Tenant/GetCurrentTenant",
+        GETUNCONFIRMEDCONTRACTCOUNT: "https://kc-talos.fengniaowu.com:4431/api/Contract/GetUnConfirmedContractCount",
+        SEND: "https://kc-talos.fengniaowu.com:4431/api/ValidateCode/Send",
+        VERIFY: "https://kc-talos.fengniaowu.com:4431/api/ValidateCode/Verify",
+        QUICKLOGIN: "https://kc-talos.fengniaowu.com:4431/api/ValidateCodeLogin/Tenant/QuickLogin",
+        LOGINBYPASSWORD: "https://kc-talos.fengniaowu.com:4431/api/PasswordLogin/Tenant/Login",
+        GETCURRENTCONTRACTS: "https://kc-talos.fengniaowu.com:4431/api/Contract/GetCurrentContracts",
+        CREATEYUEFUORDERS: "https://kc-talos.fengniaowu.com:4431/api/Order/CreateYueFuOrders",
+        CANCELCHECKOUTAPPLY: "https://kc-talos.fengniaowu.com:4431/api/Contract/CancelCheckoutApply",
+        QUERYALLORDERS: "https://kc-talos.fengniaowu.com:4431/api/Order/QueryAllOrders?orderState=",
+        GETTENANTCLEANINGS: "https://kc-talos.fengniaowu.com:4431/api/DomesticService/GetTenantCleanings",
+        GETTENANTREPAIRS: "https://kc-talos.fengniaowu.com:4431/api/DomesticService/GetTenantRepairs",
+        GETTENANTCOMPLAINTSUGGESTIONS: "https://kc-talos.fengniaowu.com:4431/api/DomesticService/GetTenantComplaintSuggestions",
+        GETTRANSACTION: "https://kc-talos.fengniaowu.com:4431/api/Transaction/GetTransaction?transactionId=",
+        GETORDERBYORDERID: "https://kc-talos.fengniaowu.com:4431/api/Order/GetOrderByOrderId?orderId=",
+        CREATETRANSACTION: "https://kc-talos.fengniaowu.com:4431/api/Transaction/CreateTransaction",
+        GETWECHATOPENID: "https://kc-talos.fengniaowu.com:4431/api/Payment/GetWeChatOpenId",
+        ORDERPAYMENT: "https://kc-talos.fengniaowu.com:4431/api/Payment/Applets/OrderPayment"
     },
     REGEX: {
         CELLPHONE: /^(13|14|15|16|17|18|19|10)\d{9}$/,
@@ -45,6 +50,7 @@ var config = {
         agreement1: '请同意蜂鸟屋注册服务协议',
         agreement2: '请同意蜂鸟屋服务协议',
         agreement3: '请同意蜂鸟屋租房分期服务协议',
+        loginError: '登录失败',
         loginSuccess: '登录成功',
         loginErr1: '密码错误',
         loginErr2: '用户未设置登录密码',
@@ -114,7 +120,7 @@ var config = {
         cleaningType: "请选择保洁类型",
         cancelCleaning: "取消成功",
         shortLink: "短链创建成功",
-        loginOut:"退出成功"
+        loginOut: "退出成功"
     }
 };
 

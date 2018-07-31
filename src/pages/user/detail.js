@@ -12,32 +12,32 @@ Page({
     onLoad: function (options) {
         if (options.key == "editorMobile2") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/editorMobile2.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/editorMobile2.html"
             });
         }
         else if (options.key == "credit") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/credit.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/credit.html"
             });
         }
         else if (options.key == "photo") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/photo.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/photo.html"
             });
         }
         else if (options.key == "resetPassword") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/resetPassword.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/resetPassword.html"
             });
         }
         else if (options.key == "verify") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/verify.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/verify.html"
             });
         }
         else if (options.key == "editorMobile") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/editorMobile.html"
+                detailWebAppUrl: "https://h.fengniaowu.com/editorMobile.html"
             });
         }
     }

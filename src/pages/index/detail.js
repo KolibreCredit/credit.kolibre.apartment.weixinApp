@@ -13,7 +13,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({
-            detailWebAppUrl: "http://www.fengniaowu.com/mobile/detail2.html?roomId=" + options.roomId
+            detailWebAppUrl: "https://www.fengniaowu.com/mobile/detail2.html?roomId=" + options.roomId
         });
     }
 })

@@ -32,7 +32,7 @@ Page({
                 that.setData({tenant: res.data});
             }
         });
-        app.getInvoke(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
             if (res.succeeded) {
                 if (res.data > 0) {
                     that.setData({unConfirmedContractCount: res.data});

@@ -13,22 +13,22 @@ Page({
         var key = options.key;
         if (key == "list2") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/list2.html?tabIndex=" + options.tabIndex
+                detailWebAppUrl: "https://h.fengniaowu.com/list2.html?tabIndex=" + options.tabIndex
             });
         }
         else if (key == "viewbaoji") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/viewbaoji.html?cleaningId=" + options.cleaningId
+                detailWebAppUrl: "https://h.fengniaowu.com/viewbaoji.html?cleaningId=" + options.cleaningId
             });
         }
         else if (key == "viewbaoxiu") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/viewbaoxiu.html?repairId=" + options.repairId
+                detailWebAppUrl: "https://h.fengniaowu.com/viewbaoxiu.html?repairId=" + options.repairId
             });
         }
         else if (key == "viewtousu") {
             this.setData({
-                detailWebAppUrl: "http://h.fengniaowu.com/viewtousu.html?complaintSuggestionId=" + options.complaintSuggestionId
+                detailWebAppUrl: "https://h.fengniaowu.com/viewtousu.html?complaintSuggestionId=" + options.complaintSuggestionId
             });
         }
     }

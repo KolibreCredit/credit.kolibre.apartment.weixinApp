@@ -13,7 +13,8 @@
     "pages/list/detail",
     "pages/bill/detail",
     "pages/service/detail",
-    "pages/service/service"
+    "pages/service/service",
+    "pages/bill/wxpay"
   ],
   "window": {
     "backgroundTextStyle": "light",
