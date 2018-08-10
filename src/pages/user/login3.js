@@ -98,9 +98,7 @@ Page({
                     app.setStorageSync("X-KC-SID", res.headers["x-KC-SID"]);
                     mui.toast(constants.msgInfo.loginSuccess);
                     setTimeout(function () {
-                        wx.reLaunch({
-                            url: '/pages/index/index'
-                        });
+                        wx.navigateBack({delta: 1});
                     }, 1000);
                 } else {
                     that.enumLoginState(res.data.loginState);

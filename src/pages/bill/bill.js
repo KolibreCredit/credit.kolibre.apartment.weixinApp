@@ -37,7 +37,9 @@ Page({
         this.setData({
             tabbar: tabbar
         });
-        this.findAllLeaseOrder(0);
+    },
+    onShow: function () {
+        this.findAllLeaseOrder(this.data.tabIndex);
     },
     findAllLeaseOrder: function (index) {
         var that = this;

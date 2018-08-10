@@ -31,7 +31,7 @@ Page({
             mui.toast(constants.msgInfo.phoneerr);
             return false;
         }
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/pages/user/login2?cellphone=' + cellphone
         });
     },

@@ -64,5 +64,10 @@ Page({
         wx.navigateTo({
             url: '/pages/user/user1'
         });
+    },
+    reserve:function (e) {
+        wx.navigateTo({
+            url: '/pages/user/detail?key=reserve'
+        });
     }
 })

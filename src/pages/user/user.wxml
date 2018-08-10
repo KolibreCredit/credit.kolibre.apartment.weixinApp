@@ -3,7 +3,7 @@
 <view class="container">
     <image class="bgImg" src="../../images/user.png"></image>
     <view class="userInfoDiv">
-        <view style="margin-top:30px;height:22px"><span class="userName">{{tenant.realName}}</span>
+        <view style="margin-top:30px;height:22px"><span class="userName">{{tenant.realName==null?'':tenant.realName}}</span>
         </view>
         <view style="height:30px;margin-top:15px"><span class="accountNo">{{tenant.cellphone}}</span>
         </view>
@@ -30,6 +30,11 @@
             <view class="item" bindtap="bill">
                 <image src="../../images/bill.png" class="icon"/>
                 <text>我的账单</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+            </view>
+            <view class="item" bindtap="reserve">
+                <image src="../../images/reserve.png" class="icon"/>
+                <text>我的预约</text>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
             <view class="item" bindtap="credit">

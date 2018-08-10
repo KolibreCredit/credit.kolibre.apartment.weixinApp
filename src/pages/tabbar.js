@@ -31,8 +31,8 @@ var tabbar = {
         },
         {
             "key": "user",
-            "iconPath": "/images/tabBar/zuyu.png",
-            "selectedIconPath": "/images/tabBar/zuyu_active.png",
+            "iconPath": "/images/tabBar/zhanghu.png",
+            "selectedIconPath": "/images/tabBar/zhanghu_active.png",
             "text": "账户"
         }
     ]

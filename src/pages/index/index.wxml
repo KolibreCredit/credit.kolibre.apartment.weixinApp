@@ -42,7 +42,8 @@
                     <image class="line" src="../../images/search-Line.png"/>
                 </view>
                 <view class="item" data-index="3" bindtap="tabItem" style="width:15%">
-                    <image class="sort" src="../../images/search-sort.png"/>
+                    <image wx:if="{{searchIndex3==-1}}" class="sort" src="../../images/search-sort.png"/>
+                    <image wx:else class="sort" src="../../images/search-sort-active.png"/>
                     <image wx:if="{{tabIndex==3}}" class="jiantou" src="../../images/search-jiantous.png"/>
                     <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
                 </view>
@@ -126,7 +127,7 @@
             <view style="height:60px"></view>
         </view>
     </scroll-view>
-    <view wx:else class="errData">
+    <view wx:if="{{isError}}" class="errData">
         <view style="text-align:center;margin-top:-50px">
             <image src="../../images/nodata.png" style="width: 110px;height: 70px"/>
             <view style="text-align:center;font-size:16px;color:#999999;margin-top:20px">

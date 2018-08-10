@@ -10,6 +10,7 @@ const mui = {
     }
 };
 // pages/bill/wxpay.js
+var waitTimer = null;
 var transactionId = "";
 var isTransaction = true;
 Page({
@@ -78,6 +79,8 @@ Page({
             } else {
                 mui.toast(res.message);
             }
+        },function (err) {
+            mui.toast(err.message);
         });
     },
     weixinLogin: function (callSuccess) {
@@ -111,23 +114,30 @@ Page({
                     };
                     app.postInvoke(constants.URLS.ORDERPAYMENT, wxpay, function (res2) {
                         if (res2.succeeded) {
-                            wx.requestPayment({
-                                'timeStamp': res2.data.timeStamp,
-                                'nonceStr': res2.data.nonceStr,
-                                'package': res2.data.package,
-                                'signType': res2.data.signType,
-                                'paySign': res2.data.paySign,
-                                'success': function (res) {
-                                },
-                                'fail': function (res) {
-                                }
-                            });
-                            setInterval(function () {
+                            waitTimer = setInterval(function () {
                                 that.queryTransaction();
                             }, 2000);
+                            wx.requestPayment({
+                                timeStamp: res2.data.timeStamp,
+                                nonceStr: res2.data.nonceStr,
+                                package: res2.data.package,
+                                signType: res2.data.signType,
+                                paySign: res2.data.paySign,
+                                success: function (wxres) {
+                                    console.log(wxres);
+                                    mui.toast("支付成功");
+                                },
+                                fail: function (err) {
+                                    console.log(err);
+                                    clearInterval(waitTimer);
+                                    mui.toast("支付失败");
+                                }
+                            });
                         } else {
                             mui.toast(res2.message);
                         }
+                    },function (err) {
+                        mui.toast(err.message);
                     });
                 });
             });
@@ -149,10 +159,13 @@ Page({
     queryTransaction: function () {
         if (transactionId != "" && isTransaction) {
             isTransaction = false;
-            app.getInvoke(constants.URLS.GETTRANSACTION.format(transactionId), function (res) {
+            app.getInvoke(constants.URLS.GETTRANSACTION + transactionId, function (res) {
                 isTransaction = true;
                 if (res.succeeded) {
-                    wx.reLaunch({url: '/pages/bill/bill'});
+                    if (res.data.transactionState == "Succeed") {
+                        clearInterval(waitTimer);
+                        wx.reLaunch({url: '/pages/bill/bill'});
+                    }
                 }
             });
         }

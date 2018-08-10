@@ -22,6 +22,8 @@ Page({
         this.setData({
             tabbar: tabbar
         });
+    },
+    onShow: function () {
         this.getTenantCleanings();
     },
     selectTab: function (e) {

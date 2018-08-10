@@ -36,6 +36,7 @@ Page({
         isFilter: false,
         modelIndex: 0,
         isSources: false,
+        isError: false,
         cities: null,
         districts: null,
         apartments: null,
@@ -57,7 +58,7 @@ Page({
         this.setData({
             tabbar: tabbar
         });
-        var tenancyId = "13EABF152B724338A3DE9A6C598EC95A";
+        var tenancyId = options.houselistId || "13EABF152B724338A3DE9A6C598EC95A";
         var forceRefresh = true;
         var data = {
             tenancyId: tenancyId,
@@ -72,10 +73,20 @@ Page({
                     apartments: res.data.apartments,
                     rooms: res.data.rooms,
                     filterRooms: res.data.rooms,
-                    isSources: true
+                    isSources: true,
+                    isError: false
+                });
+            } else {
+                that.setData({
+                    isSources: false,
+                    isError: true
                 });
             }
         }, function (err) {
+            that.setData({
+                isSources: false,
+                isError: true
+            });
             mui.toast(err.message);
         });
     },

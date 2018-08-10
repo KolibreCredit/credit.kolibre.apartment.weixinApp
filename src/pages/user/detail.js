@@ -40,5 +40,10 @@ Page({
                 detailWebAppUrl: "https://h.fengniaowu.com/editorMobile.html"
             });
         }
+        else if (options.key == "reserve") {
+            this.setData({
+                detailWebAppUrl: "https://h.fengniaowu.com/reserve.html"
+            });
+        }
     }
 })
