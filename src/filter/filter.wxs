@@ -8,7 +8,7 @@ var filter = {
         }
     },
     roomSourcesPictures: function (pictures) {
-        if (pictures != null) {
+        if (pictures != null && pictures.length > 1) {
             return pictures[0];
         } else {
             return "../../images/dataErr.png";

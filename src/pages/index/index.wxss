@@ -66,17 +66,22 @@ page {
 .apartments {
   height: 50px;
   white-space: nowrap;
-  margin-left: 2px;
+  margin-left: 5px;
   margin-right: 2px;
-  z-index: 1
+  z-index: 1;
+  text-align: left;
+}
+
+.apartmentsMore {
+  height: auto;
 }
 
 .apartments .item {
   background: #f5f5f5;
   border-radius: 3px;
-  width: 90px;
+  width: auto;
   height: 30px;
-  padding: 0 5px;
+  padding: 0 10px;
   line-height: 30px;
   margin-right: 10px;
   margin-top: 10px;
@@ -84,10 +89,46 @@ page {
   color: #646464;
   text-align: center;
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   display: inline-block
+}
+
+/*.apartmentsMore .item {
+  background: #f5f5f5;
+  border-radius: 3px;
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #646464;
+  text-align: center;
+  position: relative;
+  display: inline-block
+}*/
+
+.apartments .itemMore {
+  background: #f5f5f5;
+  border-radius: 3px;
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #646464;
+  text-align: center;
+  position: relative;
+  display: inline-block
+}
+
+.itemMore .jiantou {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  display: none;
 }
 
 .apartments .item image {
@@ -108,13 +149,21 @@ page {
   top: 0;
 }
 
+.apartments .activeMore {
+  background: #FFF3E7;
+  color: #fb9329;
+}
+
+.activeMore .jiantou {
+  display: inline-block;
+}
+
 .filter {
   position: absolute;
   top: 44px;
   left: 0;
   right: 0;
   height: auto;
-  padding-top: 20px;
   z-index: 3;
   background-color: #ffffff;
 }
@@ -318,4 +367,38 @@ page {
   height: 100vh;
   background-color: white;
   align-items: center;
+}
+
+.scroll {
+  display: flex;
+}
+
+.scroll-view-item {
+  text-align: center;
+  font-size: 14px;
+  color: #646464;
+  height: 50px;
+  line-height: 50px;
+}
+
+.scroll .scroll-view {
+  width: 50%;
+}
+
+.scroll-view-item {
+  /*border-bottom: 1rpx solid #e1e1e1;*/
+  /* border-right:1rpx solid #e1e1e1; */
+}
+
+.scroll .scroll-view .scroll-active {
+  background-color: #fff;
+  color: #fb9329;
+}
+
+.profession-center {
+  width: 70%;
+}
+
+.profession-right {
+  padding-right: 0;
 }

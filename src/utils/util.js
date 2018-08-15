@@ -14,6 +14,7 @@ function formatTime2(date) {
     var day = date.getDate();
     return [year, month, day].map(formatNumber).join('-');
 }
+
 function formatNumber(n) {
     n = n.toString();
     return n[1] ? n : '0' + n;

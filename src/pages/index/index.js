@@ -35,20 +35,23 @@ Page({
         tabIndex: -1,
         isFilter: false,
         modelIndex: 0,
-        isSources: false,
+        isSources: true,
         isError: false,
-        cities: null,
         districts: null,
+        areas: null,
         apartments: null,
         rooms: null,
         filterRooms: null,
         prices: ["不限", "2000元以下", " 2000-3000元", " 3000-4000元", "4000-5000元", "  5000-6000元", "6000元以上"],
         sorts: ["推荐", "最新发布", "价格升序", "价格降序", "面积升序", "面积降序"],
         searchIndex0: -1,
+        cityName: "",
         searchIndex1: -1,
+        districtName: "",
         searchIndex2: -1,
         searchIndex3: -1,
-        searchIndex4: -1
+        searchIndex4: -1,
+        searchIndex5: -1
     },
     /**
      * 生命周期函数--监听页面加载
@@ -58,13 +61,14 @@ Page({
         this.setData({
             tabbar: tabbar
         });
+        var that = this;
+        /*
         var tenancyId = options.houselistId || "13EABF152B724338A3DE9A6C598EC95A";
         var forceRefresh = true;
         var data = {
             tenancyId: tenancyId,
             forceRefresh: forceRefresh
         };
-        var that = this;
         app.postInvoke(config.URLS.GETROOMSOURCES, data, function (res) {
             if (res.succeeded) {
                 that.setData({
@@ -89,7 +93,44 @@ Page({
             });
             mui.toast(err.message);
         });
+        */
+        // 新逻辑
+        var assetTenancyId = options.assetTenancyId || "";
+        app.getInvoke(config.URLS.GETROOMSOURCEFILTERINFO + assetTenancyId, function (res) {
+            if (res.succeeded) {
+                that.setData({
+                    districts: [{city: "不限", areas: []}].concat(res.data.districts),
+                    apartments: res.data.apartments
+                });
+            }
+        }, function (err) {
+            mui.toast(err.message);
+        });
+        var filterData = {
+            pageIndex: 0,
+            pageSize: 200,
+            assetTenancyId: assetTenancyId,
+            cityName: "",
+            districtName: "",
+            apartmentName: "",
+            retailPriceMin: 0,
+            retailPriceMax: 9999999
+        };
+        app.postInvoke(config.URLS.GETROOMSOURCEINFOS, filterData, function (res) {
+            that.setData({
+                filterRooms: res.data.data,
+                isSources: true,
+                isError: false
+            });
+        }, function (err) {
+            that.setData({
+                isSources: false,
+                isError: true
+            });
+            mui.toast(err.message);
+        });
     },
+
     upper: function (e) {
         this.setData({
             isbg: true
@@ -115,6 +156,7 @@ Page({
         });
     },
     filterRoomsData: function () {
+        /*
         var cityKey = (this.data.searchIndex0 == -1 ? "" : this.data.cities[this.data.searchIndex0]);
         var districtKey = (this.data.searchIndex1 == -1 ? "" : this.data.districts[this.data.searchIndex1]);
         var minRetail = 0;
@@ -171,21 +213,24 @@ Page({
             arrayItems.sort(compare("roomTypeSize", "desc"));
         }
         this.setData({filterRooms: arrayItems});
+        */
     },
     searchFilter0: function (e) {
         var index = e.currentTarget.dataset.index * 1;
-        index = (index == 0 ? -1 : index);
         this.setData({
             searchIndex0: index,
-            isFilter: false
+            isFilter: (index == 0 ? false : true),
+            areas: (index == 0 ? null : [{areaName: "不限"}].concat(this.data.districts[index].areas)),
+            cityName: (index == 0 ? "" : this.data.districts[index].city),
+            searchIndex1: -1,
+            districtName: ""
         });
-        this.filterRoomsData();
     },
     searchFilter1: function (e) {
         var index = e.currentTarget.dataset.index * 1;
-        index = (index == 0 ? -1 : index);
         this.setData({
             searchIndex1: index,
+            districtName: (index == 0 ? "" : this.data.areas[index].areaName),
             isFilter: false
         });
         this.filterRoomsData();
@@ -212,6 +257,14 @@ Page({
         var index = e.currentTarget.dataset.index * 1;
         this.setData({
             searchIndex4: (this.data.searchIndex4 == index ? -1 : index)
+        });
+        this.filterRoomsData();
+    },
+    searchFilter5: function (e) {
+        var index = e.currentTarget.dataset.index * 1;
+        this.setData({
+            searchIndex5: (this.data.searchIndex5 == index ? -1 : index),
+            isFilter: false
         });
         this.filterRoomsData();
     },
