@@ -1,4 +1,5 @@
 // pages/user/detail.js
+const app = getApp();
 Page({
     /**
      * 页面的初始数据
@@ -12,37 +13,42 @@ Page({
     onLoad: function (options) {
         if (options.key == "editorMobile2") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/editorMobile2.html"
+                detailWebAppUrl: app.baseUrl + "editorMobile2.html"
             });
         }
         else if (options.key == "credit") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/credit.html"
+                detailWebAppUrl: app.baseUrl + "credit.html"
             });
         }
         else if (options.key == "photo") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/photo.html"
+                detailWebAppUrl: app.baseUrl + "photo.html"
             });
         }
         else if (options.key == "resetPassword") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/resetPassword.html"
+                detailWebAppUrl: app.baseUrl + "resetPassword.html"
             });
         }
         else if (options.key == "verify") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/verify.html"
+                detailWebAppUrl: app.baseUrl + "verify.html"
             });
         }
         else if (options.key == "editorMobile") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/editorMobile.html"
+                detailWebAppUrl: app.baseUrl + "editorMobile.html"
             });
         }
         else if (options.key == "reserve") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/reserve.html"
+                detailWebAppUrl: app.baseUrl + "reserve.html"
+            });
+        }
+        else if (options.key == "xcxtest") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "xcxtest.html"
             });
         }
     }

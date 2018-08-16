@@ -1,5 +1,5 @@
-const constants = require('../../config');
 const app = getApp();
+const constants = require('../../config');
 const $toast = require('../../utils/showToast');
 const mui = {
     toast: function (title) {
@@ -10,7 +10,6 @@ const mui = {
     }
 };
 // pages/bill/wxpay.js
-var waitTimer = null;
 var transactionId = "";
 var isTransaction = true;
 Page({
@@ -20,14 +19,15 @@ Page({
     data: {
         order: null,
         focus: true,
-        repayAmount: 0
+        repayAmount: 0,
+        waitTimer: null
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         var that = this;
-        var orderId = options.orderId || "13380759188842E182E70161309E12FD";
+        var orderId = options.orderId;
         app.getInvoke(constants.URLS.GETORDERBYORDERID + orderId, function (res) {
             if (res.succeeded) {
                 that.setData({
@@ -79,7 +79,7 @@ Page({
             } else {
                 mui.toast(res.message);
             }
-        },function (err) {
+        }, function (err) {
             mui.toast(err.message);
         });
     },
@@ -104,8 +104,9 @@ Page({
     },
     weixinPayment: function (e) {
         var that = this;
-        if (this.validateAmount()) {
+        if (isTransaction && this.validateAmount()) {
             this.createTransaction("WeiXin", function (res) {
+                isTransaction = false;
                 transactionId = res.data.transactionId;
                 that.weixinLogin(function (res1) {
                     var wxpay = {
@@ -114,7 +115,7 @@ Page({
                     };
                     app.postInvoke(constants.URLS.ORDERPAYMENT, wxpay, function (res2) {
                         if (res2.succeeded) {
-                            waitTimer = setInterval(function () {
+                            that.data.waitTimer = setInterval(function () {
                                 that.queryTransaction();
                             }, 2000);
                             wx.requestPayment({
@@ -129,14 +130,18 @@ Page({
                                 },
                                 fail: function (err) {
                                     console.log(err);
-                                    clearInterval(waitTimer);
                                     mui.toast("支付失败");
+                                    isTransaction = true;
+                                    clearInterval(that.data.waitTimer);
+                                    setTimeout(function () {
+                                        wx.reLaunch({url: '/pages/bill/bill'});
+                                    }, 1000);
                                 }
                             });
                         } else {
                             mui.toast(res2.message);
                         }
-                    },function (err) {
+                    }, function (err) {
                         mui.toast(err.message);
                     });
                 });
@@ -157,14 +162,16 @@ Page({
         }
     },
     queryTransaction: function () {
-        if (transactionId != "" && isTransaction) {
-            isTransaction = false;
+        if (transactionId != "") {
+            var that = this;
             app.getInvoke(constants.URLS.GETTRANSACTION + transactionId, function (res) {
-                isTransaction = true;
                 if (res.succeeded) {
                     if (res.data.transactionState == "Succeed") {
-                        clearInterval(waitTimer);
-                        wx.reLaunch({url: '/pages/bill/bill'});
+                        isTransaction = true;
+                        clearInterval(that.data.waitTimer);
+                        setTimeout(function () {
+                            wx.reLaunch({url: '/pages/bill/bill'});
+                        }, 1000);
                     }
                 }
             });

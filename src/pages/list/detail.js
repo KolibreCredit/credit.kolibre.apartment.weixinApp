@@ -1,4 +1,5 @@
 // pages/list/detail.js
+const app = getApp();
 Page({
     /**
      * 页面的初始数据
@@ -12,21 +13,21 @@ Page({
     onLoad: function (options) {
         if (options.key == "confirmed") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/view.html?confirmed=0&contractId=" + options.contractId
+                detailWebAppUrl: app.baseUrl + "view.html?confirmed=0&contractId=" + options.contractId
             });
         } else if (options.key == "view") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/view.html?contractId=" + options.contractId
+                detailWebAppUrl: app.baseUrl + "view.html?contractId=" + options.contractId
             });
         }
         else if (options.key == "recognitionface") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/recognitionface.html?contractId=" + options.contractId
+                detailWebAppUrl: app.baseUrl + "recognitionface.html?contractId=" + options.contractId
             });
         }
         else if (options.key == "lease") {
             this.setData({
-                detailWebAppUrl: "https://h.fengniaowu.com/lease.html?contractId=" + options.contractId
+                detailWebAppUrl: app.baseUrl + "lease.html?contractId=" + options.contractId
             });
         }
     }

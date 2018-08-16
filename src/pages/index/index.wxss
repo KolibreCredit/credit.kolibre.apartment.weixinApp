@@ -3,11 +3,7 @@ page {
   background-color: #f4f4f4;
 }
 
-.topFilter1 {
-  position: relative;
-}
-
-.topFilter2 {
+.topFilter {
   position: fixed;
   top: 0;
   z-index: 2;
@@ -66,8 +62,6 @@ page {
 .apartments {
   height: 50px;
   white-space: nowrap;
-  margin-left: 5px;
-  margin-right: 2px;
   z-index: 1;
   text-align: left;
 }
@@ -91,22 +85,6 @@ page {
   position: relative;
   display: inline-block
 }
-
-/*.apartmentsMore .item {
-  background: #f5f5f5;
-  border-radius: 3px;
-  width: auto;
-  height: 30px;
-  padding: 0 10px;
-  line-height: 30px;
-  margin-right: 10px;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #646464;
-  text-align: center;
-  position: relative;
-  display: inline-block
-}*/
 
 .apartments .itemMore {
   background: #f5f5f5;
@@ -160,12 +138,12 @@ page {
 
 .filter {
   position: absolute;
-  top: 44px;
+  top: 0;
   left: 0;
   right: 0;
-  height: auto;
+  height: 100vh;
   z-index: 3;
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .filter .item {
@@ -182,11 +160,11 @@ page {
 }
 
 .viewContent1 {
-  margin-top: 0px;
+  padding-top: 275px;
 }
 
 .viewContent2 {
-  margin-top: 100px;
+  padding-top: 95px;
 }
 
 .list {
@@ -362,11 +340,9 @@ page {
 }
 
 .errData {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
   background-color: white;
-  align-items: center;
+  text-align: center;
+  padding: 50px 0;
 }
 
 .scroll {
@@ -383,6 +359,7 @@ page {
 
 .scroll .scroll-view {
   width: 50%;
+  background-color: #FFFFFF
 }
 
 .scroll-view-item {

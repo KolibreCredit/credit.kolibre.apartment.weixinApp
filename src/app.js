@@ -1,5 +1,6 @@
 //app.js
 App({
+    baseUrl: "https://dev.fengniaowu.com/",
     setStorageSync: function (key, value) {
         wx.setStorageSync(key, value);
     },

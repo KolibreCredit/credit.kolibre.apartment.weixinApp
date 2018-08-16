@@ -1,6 +1,6 @@
 // pages/index/detail.js
+const app = getApp();
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -12,7 +12,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({
-            detailWebAppUrl: "https://h.fengniaowu.com/detail2.html?roomId=" + options.roomId
+            detailWebAppUrl: app.baseUrl + "detail2.html?roomId=" + options.roomId
         });
     }
 })

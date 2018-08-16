@@ -5,19 +5,20 @@
 <wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/index/index.wxml-->
 <view class="container">
-    <scroll-view wx:if="{{isSources}}" style="height:100vh" scroll-y="true" upper-threshold="180" bindscroll="scroll"  bindscrolltoupper="upper">
-        <view style="text-align:center;position:relative">
-            <image src="../../images/bg.png" style="width:100%;height:180px;vertical-align:bottom"></image>
-            <view style="text-align:center;position: absolute;top:20px;width:100%">
-                <image src="../../images/logo.png" style="width:100px;height:86px"></image>
+    <scroll-view style="height:100vh" scroll-y="true" upper-threshold="180" bindscroll="scroll"
+                 bindscrolltoupper="upper" bindscrolltolower="lower">
+        <view style="text-align:center;background-color:white;width:100%" class="topFilter">
+            <view style="text-align:center" wx:if="{{isbg}}">
+                <image src="../../images/bg.png" style="width:100%;height:180px;vertical-align:bottom"></image>
+                <view style="text-align:center;position: absolute;top:20px;width:100%">
+                    <image src="../../images/logo.png" style="width:100px;height:86px"></image>
+                </view>
+                <view style="text-align:center;position:absolute;top:110px;width:100%">
+                    <image src="../../images/logo2.png" style="width:240px;height:36px"></image>
+                </view>
             </view>
-            <view style="text-align:center;position:absolute;top:110px;width:100%">
-                <image src="../../images/logo2.png" style="width:240px;height:36px"></image>
-            </view>
-        </view>
-        <view style="text-align:center;background-color:white;width:100%"  class="{{isbg ? 'topFilter1' : 'topFilter2'}}">
             <view class="search">
-                <view class="item" data-index="0" bindtap="tabItem" style="width:25%">
+                <view class="item" data-index="0" bindtap="tabItem" style="width:28%">
                     <span wx:if="{{districtName!=''}}" class="condition active">{{districtName}}</span>
                     <span wx:elif="{{cityName!=''}}" class="condition active">{{cityName}}</span>
                     <span wx:else class="condition">区域</span>
@@ -25,81 +26,90 @@
                     <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
                     <image class="line" src="../../images/search-Line.png"/>
                 </view>
-                <view class="item" data-index="2" bindtap="tabItem" style="width:25%">
+                <view class="item" data-index="2" bindtap="tabItem" style="width:28%">
                     <span wx:if="{{searchIndex2==-1}}" class="condition" style="display:inline-block">租金</span>
                     <span wx:else class="condition active">{{prices[searchIndex2]}}</span>
                     <image wx:if="{{tabIndex==2}}" class="jiantou" src="../../images/search-jiantous.png"/>
                     <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
                     <image class="line" src="../../images/search-Line.png"/>
                 </view>
-                <view class="item" data-index="3" bindtap="tabItem" style="width:25%">
+                <view class="item" data-index="3" bindtap="tabItem" style="width:28%">
                     <span wx:if="{{searchIndex3==-1}}" class="condition" style="display:inline-block">排序</span>
                     <span wx:else class="condition active">{{sorts[searchIndex3]}}</span>
                     <image wx:if="{{tabIndex==3}}" class="jiantou" src="../../images/search-jiantous.png"/>
                     <image wx:else class="jiantou" src="../../images/search-jiantou.png"/>
                 </view>
-                <view class="item" style="width:25%">
-                    <image wx:if="{{modelIndex==0}}" class="model" src="../../images/search-list.png" data-index="1" bindtap="tabModel"/>
+                <view class="item" style="width:16%">
+                    <image wx:if="{{modelIndex==0}}" class="model" src="../../images/search-list.png" data-index="1"
+                           bindtap="tabModel"/>
                     <image wx:else class="model" src="../../images/search-view.png" data-index="0" bindtap="tabModel"/>
                 </view>
             </view>
-            <scroll-view class="apartments" scroll-x="true">
-                <view class="{{searchIndex4==index?'item active':'item'}}" wx:for="{{apartments}}" wx:if="{{index<11}}"  data-index="{{index}}" bindtap="searchFilter4">
+            <scroll-view class="apartments" scroll-x="true" style="padding:0 5px;background:#ffffff">
+                <view class="{{searchIndex4==index?'item active':'item'}}" wx:for="{{filterApartments}}"
+                      wx:if="{{index<10}}" data-index="{{index}}" bindtap="searchFilter4">
                     <span>{{item.apartmentName}}</span>
                     <image src='../../images/apartments.png'/>
                 </view>
-                <view wx:if="{{apartments.length>5}}" class="{{searchIndex5!=-1?'itemMore activeMore':'itemMore'}}" data-index="4" bindtap="tabItem">
+                <view wx:if="{{filterApartments.length>10}}"
+                      class="{{searchIndex5!=-1?'itemMore activeMore':'itemMore'}}" data-index="4" bindtap="tabItem">
                     <span>更多</span>
                     <image class="jiantou" src='../../images/search-jiantous.png'/>
                 </view>
             </scroll-view>
-            <view class="filter" wx:if="{{tabIndex==0 && isFilter}}">
-                <view class="scroll">
-                    <scroll-view scroll-y="true" class='scroll-view' style="height:100%;background:#f0f0f0">
-                        <view wx:for="{{districts}}" class="scroll-view-item {{searchIndex0==index?'scroll-active':''}}"
-                              data-index="{{index}}" bindtap='searchFilter0'>
-                            {{item.city}}
-                        </view>
-                    </scroll-view>
-                    <scroll-view scroll-y="true" class='scroll-view' style='height:100%;'>
-                        <view class="scroll-view-item {{searchIndex1==index?'scroll-active':''}}" wx:for="{{areas}}"
-                              data-index='{{index}}' bindtap='searchFilter1'>
-                            {{item.areaName}}
-                        </view>
-                    </scroll-view>
-                </view>
-            </view>
-            <view class="filter" wx:if="{{tabIndex==1 && isFilter}}">
-                <view class="{{searchIndex1==index?'item active':'item'}}" wx:for="{{districts}}"
-                      data-index="{{index}}" bindtap="searchFilter1">
-                    {{item}}
-                </view>
-            </view>
-            <view class="filter" wx:if="{{tabIndex==2 && isFilter}}">
-                <view class="{{searchIndex2==index?'item active':'item'}}" wx:for="{{prices}}" data-index="{{index}}"
-                      bindtap="searchFilter2">
-                    {{item}}
-                </view>
-            </view>
-            <view class="filter" wx:if="{{tabIndex==3 && isFilter}}">
-                <view class="{{searchIndex3==index?'item active':'item'}}" wx:for="{{sorts}}" data-index="{{index}}"
-                      bindtap="searchFilter3">
-                    {{item}}
-                </view>
-            </view>
-            <view class="filter" wx:if="{{tabIndex==4 && isFilter}}">
-                <view class="apartments" style="height:auto;white-space:normal;padding-bottom:20px">
-                    <view class="{{searchIndex5==index?'item active':'item'}}" wx:for="{{apartments}}" data-index="{{index}}" bindtap="searchFilter5">
-                        <span>{{item.apartmentName}}</span>
-                        <image src='../../images/apartments.png'/>
+            <view style="position:relative;z-index:2;margin-top:-50px">
+                <view class="filter" wx:if="{{tabIndex==0 && isFilter}}">
+                    <view class="scroll">
+                        <scroll-view scroll-y="true" class='scroll-view' style="height:200px;background:#f0f0f0">
+                            <view wx:for="{{districts}}"
+                                  class="scroll-view-item {{searchIndex0==index?'scroll-active':''}}"
+                                  data-index="{{index}}" bindtap='searchFilter0'>
+                                {{item.city}}
+                            </view>
+                        </scroll-view>
+                        <scroll-view scroll-y="true" class='scroll-view' style='height:200px'>
+                            <view class="scroll-view-item {{searchIndex1==index?'scroll-active':''}}" wx:for="{{areas}}"
+                                  data-index='{{index}}' bindtap='searchFilter1'>
+                                {{item.areaName}}
+                            </view>
+                        </scroll-view>
                     </view>
+                </view>
+                <view class="filter" wx:if="{{tabIndex==2 && isFilter}}">
+                    <view style="background-color:#FFFFFF">
+                        <view class="{{searchIndex2==index?'item active':'item'}}" wx:for="{{prices}}"
+                              data-index="{{index}}"
+                              bindtap="searchFilter2">
+                            {{item}}
+                        </view>
+                    </view>
+                </view>
+                <view class="filter" wx:if="{{tabIndex==3 && isFilter}}">
+                    <view style="background-color:#FFFFFF">
+                        <view class="{{searchIndex3==index?'item active':'item'}}" wx:for="{{sorts}}"
+                              data-index="{{index}}"
+                              bindtap="searchFilter3">
+                            {{item}}
+                        </view>
+                    </view>
+                </view>
+                <view class="filter" wx:if="{{tabIndex==4 && isFilter}}">
+                    <scroll-view class="apartments" scroll-y="true"
+                                 style="height:auto;white-space:normal;padding-bottom:20px;padding-left:20px;padding-right:20px;background-color:#FFFFFF">
+                        <view class="{{searchIndex5==index?'item active':'item'}}" wx:for="{{filterApartments}}"
+                              data-index="{{index}}" bindtap="searchFilter5">
+                            <span>{{item.apartmentName}}</span>
+                            <image src='../../images/apartments.png'/>
+                        </view>
+                    </scroll-view>
                 </view>
             </view>
         </view>
-        <view class="{{isbg ? 'viewContent1' : 'viewContent2'}}">
+        <view wx:if="{{isSources}}" class="{{isbg ? 'viewContent1' : 'viewContent2'}}">
             <view class="list" wx:if="{{modelIndex==0}}">
                 <view class="item" wx:for="{{filterRooms}}" bindtap="detail2" data-roomid="{{item.roomId}}">
-                    <view class="picture" style="background:url('{{filter.roomSourcesPictures(item.pictures)}}');background-size: cover;background-position:center"/>
+                    <view class="picture"
+                          style="background:url('{{filter.roomSourcesPictures(item.pictures)}}');background-size: cover;background-position:center"/>
                     <view class="apartmentName">{{item.roomSourceName}}</view>
                     <view class="retailPrice">
                         {{filter.formatPrice2(item.retailPrice)}}
@@ -136,14 +146,15 @@
             </view>
             <view style="height:60px"></view>
         </view>
-    </scroll-view>
-    <view wx:if="{{isError}}" class="errData">
-        <view style="text-align:center;margin-top:-50px">
-            <image src="../../images/nodata.png" style="width: 110px;height: 70px"/>
+        <view wx:if="{{isError}}" class="errData">
+            <view style="{{isbg?'height:275px' : 'height:95px'}}"></view>
+            <view style="text-align:center">
+                <image src="../../images/nodata.png" style="width: 110px;height: 70px"/>
+            </view>
             <view style="text-align:center;font-size:16px;color:#999999;margin-top:20px">
                 未查询到房源信息
             </view>
         </view>
-    </view>
+    </scroll-view>
 </view>
 <tabbar data="{{tabbar}}"></tabbar>

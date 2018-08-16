@@ -56,6 +56,11 @@ Page({
             url: '/pages/user/detail?key=editorMobile'
         });
     },
+    xcxtest: function (e) {
+        wx.navigateTo({
+            url: '/pages/user/detail?key=xcxtest'
+        });
+    },
     loginOut: function (e) {
         app.removeStorageSync("X-KC-SID");
         mui.toast(constants.msgInfo.loginOut);
