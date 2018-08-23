@@ -10,6 +10,7 @@
         您有<span>{{confirmCount}}</span>个待确认租约
     </view>
     <view wx:if="{{!isNoData}}" class="{{confirmCount>0?'listLeases':''}}">
+        <view style="height:0px"></view>
         <view class="mui-table-view" wx:for="{{contracts}}">
             <view class="mui-table-view-cell" style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)">
                 <view class="mui-media-body">

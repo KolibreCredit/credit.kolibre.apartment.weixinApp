@@ -51,5 +51,15 @@ Page({
                 detailWebAppUrl: app.baseUrl + "xcxtest.html"
             });
         }
+        else if (options.key == "login") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "cookie.html?sync=login&X-KC-SID=" + app.getStorageSync("X-KC-SID")
+            });
+        }
+        else if (options.key == "logout") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "cookie.html?sync=logout"
+            });
+        }
     }
 })

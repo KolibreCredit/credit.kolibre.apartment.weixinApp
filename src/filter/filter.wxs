@@ -8,7 +8,7 @@ var filter = {
         }
     },
     roomSourcesPictures: function (pictures) {
-        if (pictures != null && pictures.length > 1) {
+        if (pictures != null && pictures.length > 0) {
             return pictures[0];
         } else {
             return "../../images/dataErr.png";
@@ -24,7 +24,7 @@ var filter = {
         return date.substring(5, 7);
     },
     formatHHMM: function (date) {
-        return date.substring(11,16);
+        return date.substring(11, 16);
     },
     formatAmount: function (amount) {
         amount = Number(amount * 0.01);
@@ -124,7 +124,7 @@ var filter = {
                 return "其他"
         }
     },
-    getRepairType:function(repairType) {
+    getRepairType: function (repairType) {
         switch (repairType) {
             case  "Qiangmian":
                 return "墙面";

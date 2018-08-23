@@ -65,9 +65,12 @@ Page({
         app.removeStorageSync("X-KC-SID");
         mui.toast(constants.msgInfo.loginOut);
         setTimeout(function () {
-            wx.reLaunch({
-                url: '/pages/index/index'
+            /*  wx.reLaunch({
+                  url: '/pages/index/index'
+              });*/
+            wx.navigateTo({
+                url: '/pages/user/detail?key=logout'
             });
-        },1000);
+        }, 1000);
     }
 })

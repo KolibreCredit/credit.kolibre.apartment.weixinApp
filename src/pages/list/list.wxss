@@ -5,7 +5,7 @@ page {
 
 .mui-table-view {
   position: relative;
-  margin-top: 10px;
+  margin-top:10px;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;

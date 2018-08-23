@@ -66,6 +66,9 @@ Page({
             };
             isSendCaptcha = false;
             var that = this;
+            that.setData({
+                waitCount: 60
+            });
             waitTimer = setInterval(function () {
                 that.sendWaitTimer();
             }, 1000);
@@ -150,7 +153,10 @@ Page({
                             app.setStorageSync("X-KC-SID", res1.headers["x-KC-SID"]);
                             mui.toast(constants.msgInfo.loginSuccess);
                             setTimeout(function () {
-                                wx.navigateBack({delta: 1});
+                                //wx.navigateBack({delta: 1});
+                                wx.redirectTo({
+                                    url: '/pages/user/detail?key=login'
+                                });
                             }, 1000);
                         }
                         else {

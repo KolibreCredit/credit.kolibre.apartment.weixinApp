@@ -8,30 +8,35 @@
         <view class="userManageList">
             <view class="item" wx:if="{{hasInfo}}">
                 <view bindtap="photo" style="border-bottom:none">
-                    个人信息<image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+                    个人信息
+                    <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
                 </view>
             </view>
             <view class="item" wx:else>
                 <viwe bindtap="verify" style="border-bottom:none">
-                    个人信息<image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+                    个人信息
+                    <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
                 </viwe>
             </view>
             <view style="height:10px;background:#f8f8f8">
             </view>
             <view class="item">
                 <view bindtap="resetPassword">
-                    密码管理 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+                    密码管理
+                    <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
                 </view>
             </view>
             <view class="item">
                 <view bindtap="editorMobile" style=" border-bottom: none">
-                    修改手机号 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+                    修改手机号
+                    <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
                 </view>
             </view>
         </view>
     </view>
     <view class="loginOut">
-        <button class="btnActive" style="background:#fd8b14;border-radius:100px;height:48px;color:#ffffff;font-size:18px;width:100%;border:none"
+        <button class="btnActive"
+                style="background:#fd8b14;border-radius:100px;height:48px;color:#ffffff;font-size:18px;width:100%;border:none"
                 bindtap="loginOut">退出登录
         </button>
     </view>

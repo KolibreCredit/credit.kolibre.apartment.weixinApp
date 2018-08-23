@@ -3,16 +3,21 @@ page {
   background-color: #f4f4f4;
 }
 
-.topFilter {
+.topFilter1 {
+  position: relative;
+}
+
+.topFilter2 {
   position: fixed;
   top: 0;
   z-index: 2;
+  background: #ffffff;
+  width: 100%;
 }
 
 .search {
+  position: relative;
   background: #ffffff;
-  width: 100%;
-  height: 44px;
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -24,9 +29,6 @@ page {
   color: #646464;
   text-align: center;
   position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .item .line {
@@ -138,12 +140,13 @@ page {
 
 .filter {
   position: absolute;
-  top: 0;
+  top: -50px;
   left: 0;
   right: 0;
-  height: 100vh;
+  bottom: 0;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.4);
+  height: 100vh;
 }
 
 .filter .item {
@@ -160,11 +163,11 @@ page {
 }
 
 .viewContent1 {
-  padding-top: 275px;
+
 }
 
 .viewContent2 {
-  padding-top: 95px;
+
 }
 
 .list {
@@ -179,7 +182,7 @@ page {
   padding-left: 160px;
   padding-right: 20px;
   padding-top: 15px;
-  width: 100%;
+  width: auto;
 }
 
 .item .picture {
@@ -195,7 +198,6 @@ page {
   color: #646464;
   max-height: 44px;
   line-height: 22px;
-  /*多行*/
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

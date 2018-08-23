@@ -47,10 +47,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var assetTenancyId = options.assetTenancyId || "";
+        if (assetTenancyId != "") {
+            app.setStorageSync("assetTenancyId", assetTenancyId);
+        } else {
+            assetTenancyId = app.getStorageSync("assetTenancyId") || "";
+        }
         tabbar.index = 0;
         this.setData({
             tabbar: tabbar,
-            assetTenancyId: options.assetTenancyId || ""
+            assetTenancyId: assetTenancyId
         });
         var that = this;
         app.getInvoke(config.URLS.GETROOMSOURCEFILTERINFO + this.data.assetTenancyId, function (res) {
@@ -186,7 +192,8 @@ Page({
             areas: (index == 0 ? null : [{areaName: "不限"}].concat(this.data.districts[index].areas)),
             cityName: (index == 0 ? "" : this.data.districts[index].city),
             searchIndex1: -1,
-            districtName: ""
+            districtName: "",
+            tabIndex: (index == 0 ? -1 : this.data.tabIndex)
         });
         if (index == 0) {
             this.setData({
@@ -203,7 +210,8 @@ Page({
         this.setData({
             searchIndex1: index,
             districtName: districtName,
-            isFilter: false
+            isFilter: false,
+            tabIndex: -1
         });
         var arrApartments = [];
         var apartment = null;
@@ -231,7 +239,8 @@ Page({
         index = (index == 0 ? -1 : index);
         this.setData({
             searchIndex2: index,
-            isFilter: false
+            isFilter: false,
+            tabIndex: -1
         });
         this.filterRoomSource();
     },
@@ -240,7 +249,8 @@ Page({
         index = (index == 0 ? -1 : index);
         this.setData({
             searchIndex3: index,
-            isFilter: false
+            isFilter: false,
+            tabIndex: -1
         });
         this.filterRoomSource();
     },
@@ -260,6 +270,12 @@ Page({
             isFilter: false
         });
         this.filterRoomSource();
+    },
+    hideFilter: function (e) {
+        this.setData({
+            isFilter: false,
+            tabIndex: -1
+        });
     },
     detail2: function (e) {
         var roomId = e.currentTarget.dataset.roomid;

@@ -50,7 +50,8 @@ Page({
                     that.setData({
                         recentDays: res.data.recentDays,
                         recentOrderAmount: res.data.recentOrderAmount,
-                        orders: res.data.orderResponse
+                        orders: res.data.orderResponse,
+                        isNoData: false
                     });
                 }
                 else {

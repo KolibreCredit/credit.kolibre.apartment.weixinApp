@@ -98,7 +98,10 @@ Page({
                     app.setStorageSync("X-KC-SID", res.headers["x-KC-SID"]);
                     mui.toast(constants.msgInfo.loginSuccess);
                     setTimeout(function () {
-                        wx.navigateBack({delta: 1});
+                        //wx.navigateBack({delta: 1});
+                        wx.redirectTo({
+                            url: '/pages/user/detail?key=login'
+                        });
                     }, 1000);
                 } else {
                     that.enumLoginState(res.data.loginState);

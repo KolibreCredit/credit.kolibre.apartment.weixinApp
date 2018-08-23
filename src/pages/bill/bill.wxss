@@ -194,6 +194,7 @@ input[type=text], input[type=password] {
   background: rgba(224, 224, 224, 0.7);
   border-radius: 2px;
   height: 20px;
+  line-height:20px;
   width: 20px;
   color: #8e8e8e;
   display: inline-block;
