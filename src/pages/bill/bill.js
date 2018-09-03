@@ -21,7 +21,7 @@ Page({
         tabIndex: 0,
         isNoData: false,
         recentDays: 15,
-        recentOrderAmount: 0,
+        recentOrderAmount: -1,
         orders: null
     },
     bill: function (e) {
@@ -49,7 +49,7 @@ Page({
                 if (res.data.orderResponse.length > 0) {
                     that.setData({
                         recentDays: res.data.recentDays,
-                        recentOrderAmount: res.data.recentOrderAmount,
+                        recentOrderAmount: (orderState == "Paid" ? -1 : res.data.recentOrderAmount),
                         orders: res.data.orderResponse,
                         isNoData: false
                     });

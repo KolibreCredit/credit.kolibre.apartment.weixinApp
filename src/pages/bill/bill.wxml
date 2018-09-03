@@ -5,7 +5,7 @@
 <wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/bill/bill.wxml-->
 <view class="container">
-    <view style="position:fixed;width:100%;left:0;top:0;background:#ffffff;z-index:1">
+    <view style="position:fixed;width:100%;left:0;top:0;background:#ffffff;z-index:100">
         <view class="selectTable">
             <view class="tabItem {{tabIndex==0?'active':'' }}" data-index="0" bindtap="selectTab">
                 <span>未支付</span>
@@ -25,7 +25,9 @@
             近{{recentDays}}日有<span>{{recentOrderAmount}}</span>笔待支付账单
         </view>
     </view>
-    <view wx:if="{{!isNoData}}" class="billList {{tabIndex==0?'active':''}}">
+    <view wx:if="{{tabIndex==0}}" style="height:70px"></view>
+    <view wx:if="{{tabIndex==1}}" style="height:40px"></view>
+    <view wx:if="{{!isNoData}}" class="billList}}">
         <block wx:for="{{orders}}">
             <block wx:if="{{item.orderState=='Created'}}">
                 <view class="billItem {{item.isCurrent?'created':''}}">
@@ -99,7 +101,8 @@
                         <span class="stage" wx:if="{{item.orderModel == 'Staging'}}">分</span>
                     </view>
                     <view class="bottom">
-                        <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}" bindtap="createTransaction">立即支付</span>
+                            <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}"
+                                  bindtap="createTransaction">立即支付</span>
                         <block wx:if="{{item.canStage}}">
                             <span wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}" class="billbtnStage"
                                   bindtap="createStage">申请分期</span>
@@ -138,7 +141,8 @@
                         <span class="stage" wx:if="{{item.orderModel == 'Staging'}}">分</span>
                     </view>
                     <view class="bottom">
-                        <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}" bindtap="createTransaction">立即支付</span>
+                            <span class="billbtnPay btnActive" data-orderid="{{item.orderId}}"
+                                  bindtap="createTransaction">立即支付</span>
                         <block wx:if="{{item.canStage}}">
                             <span wx:if="{{item.isCurrent}}" data-orderid="{{item.orderId}}" class="billbtnStage"
                                   bindtap="createStage">申请分期</span>
@@ -209,7 +213,6 @@
                 </view>
             </block>
         </block>
-        <view style="height:60px"></view>
     </view>
     <div wx:if="{{isNoData}}" class="noData" style="width:100%">
         <view style="text-align:center">
@@ -221,7 +224,7 @@
         <view wx:else style="font-size:16px; color:#999999">
             亲，您没有已完成账单
         </view>
-        <view style="height:50px"></view>
     </div>
+    <view style="height:60px"></view>
 </view>
 <tabbar bindchange="tabChange" data="{{tabbar}}"></tabbar>
