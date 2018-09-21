@@ -37,14 +37,23 @@
                 <text>我的预约</text>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
+            <view class="item" bindtap="fuwu">
+                <image src="../../images/fuwu.png" class="icon"/>
+                <text>我的服务</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+            </view>
+            <view class="item" style="border-bottom: none" bindtap="tuikuan">
+                <image src="../../images/tuikuan.png" class="icon"/>
+                <text>退款情况</text>
+                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
+            </view>
+        </view>
+    </view>
+    <view style="background-color:#ffffff;padding:0 20px">
+        <view class="userManageList" style="margin-top:10px">
             <view class="item" bindtap="credit">
                 <image src="../../images/credit.png" class="icon"/>
                 <text>信用管理</text>
-                <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
-            </view>
-            <view class="item" bindtap="fuwu">
-                <image src="../../images/fuwu.png" class="icon"/>
-                <text>生活服务</text>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
             <view class="item" style="border-bottom: none" bindtap="shezhi">

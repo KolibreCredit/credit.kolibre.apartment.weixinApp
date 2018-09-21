@@ -69,5 +69,10 @@ Page({
         wx.navigateTo({
             url: '/pages/user/detail?key=reserve'
         });
+    },
+    tuikuan:function (e){
+        wx.navigateTo({
+            url: '/pages/user/detail?key=tuikuan'
+        });
     }
 })

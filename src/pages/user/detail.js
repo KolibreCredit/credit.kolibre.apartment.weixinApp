@@ -61,5 +61,10 @@ Page({
                 detailWebAppUrl: app.baseUrl + "cookie.html?sync=logout"
             });
         }
+        else if (options.key == "tuikuan") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "settlement.html"
+            });
+        }
     }
 })
