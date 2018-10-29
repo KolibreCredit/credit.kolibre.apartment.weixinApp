@@ -22,7 +22,8 @@ Page({
         isNoData: false,
         recentDays: 15,
         recentOrderAmount: -1,
-        orders: null
+        orders: null,
+        isMsgAlert: false
     },
     bill: function (e) {
         wx.navigateTo({
@@ -39,11 +40,11 @@ Page({
         });
     },
     onShow: function () {
-        this.findAllLeaseOrder(this.data.tabIndex);
+        this.findAllLeaseOrder();
     },
-    findAllLeaseOrder: function (index) {
+    findAllLeaseOrder: function () {
         var that = this;
-        var orderState = (index == 0 ? "NotPaid" : "Paid");
+        var orderState = (this.data.tabIndex == 0 ? "NotPaid" : "Paid");
         app.getInvoke((constants.URLS.QUERYALLORDERS + orderState), function (res) {
             if (res.succeeded) {
                 if (res.data.orderResponse.length > 0) {
@@ -73,8 +74,10 @@ Page({
     selectTab: function (e) {
         var index = e.currentTarget.dataset.index * 1;
         if (this.data.tabIndex != index) {
-            this.setData({tabIndex: index});
-            this.findAllLeaseOrder(index);
+            this.setData({
+                tabIndex: index
+            });
+            this.findAllLeaseOrder();
         }
     },
     view: function (e) {
@@ -91,8 +94,40 @@ Page({
     },
     createTransaction: function (e) {
         var orderId = e.currentTarget.dataset.orderid;
-        wx.navigateTo({
-            url: '/pages/bill/wxpay?orderId=' + orderId
+        var billLists = this.data.orders;
+        var filterCanPay = function (orderId) {
+            var canPay = false;
+            for (var i = 0; i < billLists.length; i++) {
+                if (billLists[i].orderId == orderId) {
+                    canPay = billLists[i].canPay;
+                    break;
+                }
+            }
+            return canPay;
+        }
+        if (filterCanPay(orderId)) {
+            wx.navigateTo({
+                url: '/pages/bill/wxpay?orderId=' + orderId
+            });
+        } else {
+            this.setData({
+                isMsgAlert: true
+            });
+        }
+    },
+    closeApply: function (e) {
+        this.setData({
+            isMsgAlert: false
         });
+    },
+    confirmList: function (e) {
+        this.setData({
+            isMsgAlert: false
+        });
+        setTimeout(function () {
+            wx.reLaunch({
+                url: '/pages/list/list'
+            });
+        },100);
     }
 })
