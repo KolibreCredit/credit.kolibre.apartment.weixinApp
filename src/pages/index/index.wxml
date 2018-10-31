@@ -62,14 +62,14 @@
                 <view wx:if="isFilter" style="position:relative">
                     <view class="filter" wx:if="{{tabIndex==0}}">
                         <view class="scroll" style="height:200px">
-                            <scroll-view scroll-y="true" class='scroll-view' style="background:#f0f0f0">
+                            <scroll-view scroll-y="true" class='scroll-view' style="height:200px;background:#f0f0f0">
                                 <view wx:for="{{districts}}"
                                       class="scroll-view-item {{searchIndex0==index?'scroll-active':''}}"
                                       data-index="{{index}}" bindtap='searchFilter0'>
                                     {{item.city}}
                                 </view>
                             </scroll-view>
-                            <scroll-view scroll-y="true" class='scroll-view'>
+                            <scroll-view scroll-y="true" class='scroll-view' style="height:200px">
                                 <view class="scroll-view-item {{searchIndex1==index?'scroll-active':''}}"
                                       wx:for="{{areas}}"
                                       data-index='{{index}}' bindtap='searchFilter1'>
