@@ -223,7 +223,7 @@
                 <view class="billItem canceled}}">
                     <view class="top" bindtap="view" data-orderid="{{item.orderId}}">
                         <image class="month" src="../../images/months/{{filter.formatMM(item.checkoutTime)}}.png"/>
-                        取消日期：{{filter.formatYYYMMDDHHMM(item.paymentTime)}}
+                        取消日期：{{filter.formatYYYMMDDHHMM(item.checkoutTime)}}
                         <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
                         <span class="state">已取消</span>
                     </view>
