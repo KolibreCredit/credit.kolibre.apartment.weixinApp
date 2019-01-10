@@ -2,16 +2,6 @@
 const tabbar = require('../tabbar');
 const constants = require('../../config');
 const app = getApp();
-const $toast = require('../../utils/showToast');
-const mui = {
-    toast: function (title) {
-        $toast.showToast({
-            title: title,
-            mask: false
-        });
-    }
-};
-
 Page({
     /**
      * 页面的初始数据
@@ -34,13 +24,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        tabbar.index = 2;
-        this.setData({
-            tabbar: tabbar
-        });
+
     },
     onShow: function () {
         this.findAllLeaseOrder();
+        var that = this;
+        tabbar.index = 2;
+        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+            if (res.succeeded) {
+                if (res.data > 0) {
+                    tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
+                    tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+            }
+            that.setData({
+                tabbar: tabbar
+            });
+        });
     },
     findAllLeaseOrder: function () {
         var that = this;
@@ -107,7 +107,7 @@ Page({
         }
         if (filterCanPay(orderId)) {
             wx.navigateTo({
-                url: '/pages/bill/wxpay?orderId=' + orderId
+                url: '/pages/bill/wxpay?goto=minibill&orderId=' + orderId
             });
         } else {
             this.setData({
@@ -128,6 +128,6 @@ Page({
             wx.reLaunch({
                 url: '/pages/list/list'
             });
-        },100);
+        }, 100);
     }
 })

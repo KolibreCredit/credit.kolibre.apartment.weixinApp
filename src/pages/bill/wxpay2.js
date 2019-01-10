@@ -9,7 +9,7 @@ const mui = {
         });
     }
 };
-// pages/bill/wxpay.js
+// pages/bill/wxpay2.js
 var transactionId = "";
 var isTransaction = true;
 Page({
@@ -17,35 +17,28 @@ Page({
      * 页面的初始数据
      */
     data: {
-        order: null,
         focus: true,
-        repayAmount: 0,
+        tabIndex: -1,
+        repayAmount: "",
         waitTimer: null,
-        goto: "",
+        apartmentName: "",
+        roomNumber: "",
+        deviceType: "",
         deviceId: ""
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var goto = options.goto;
-        var deviceId = "";
-        if (goto.toUpperCase() == "BILL2") {
-            deviceId = options.deviceId;
-        }
+        var apartmentName = decodeURI(options.apartmentName);
+        var roomNumber = decodeURI(options.roomNumber);
+        var deviceType = decodeURI(options.deviceType);
+        var deviceId = decodeURI(options.deviceId);
         this.setData({
-            goto: goto,
+            apartmentName: apartmentName,
+            roomNumber: roomNumber,
+            deviceType: deviceType,
             deviceId: deviceId
-        });
-        var that = this;
-        var orderId = options.orderId;
-        app.getInvoke(constants.URLS.GETORDERBYORDERID + orderId, function (res) {
-            if (res.succeeded) {
-                that.setData({
-                    order: res.data,
-                    repayAmount: (res.data.repayAmount * 0.01).toFixed(2)
-                });
-            }
         });
     },
     bindKeyInput: function (e) {
@@ -53,7 +46,14 @@ Page({
             repayAmount: e.detail.value
         });
     },
-
+    itemSelect: function (e) {
+        var itemAmounts = [30, 50, 100, 200, 500, 1000];
+        var tabIndex = parseInt(e.currentTarget.dataset.index);
+        this.setData({
+            tabIndex: tabIndex,
+            repayAmount: itemAmounts[tabIndex]
+        });
+    },
     validateAmount: function () {
         var amount = this.data.repayAmount;
         if (amount == "") {
@@ -64,22 +64,13 @@ Page({
             mui.toast("支付金额不能为零!");
             return false;
         }
-        amount = parseInt((parseFloat(amount) * 100).toFixed());
-        if (amount > this.data.order.totalAmount) {
-            mui.toast("支付金额输入错误!");
-            return false;
-        }
         return true;
     },
-
     createTransaction: function (transactionMethod, callSuccess) {
         var data = {
-            orderId: this.data.order.orderId,
-            orderModel: this.data.order.orderModel,
+            deviceId: this.data.deviceId,
             amount: parseInt((parseFloat(this.data.repayAmount) * 100).toFixed()),
-            transactionCategory: "In",
-            transactionMethod: transactionMethod,
-            paymentSource: "Fengniaowu"
+            transactionMethod: transactionMethod
         };
         app.postInvoke(constants.URLS.CREATETRANSACTION, data, function (res) {
             if (res.succeeded) {
@@ -91,7 +82,6 @@ Page({
             mui.toast(err.message);
         });
     },
-
     weixinLogin: function (callSuccess) {
         wx.login({
             success: function (wxRes) {
@@ -144,19 +134,9 @@ Page({
                                     isTransaction = true;
                                     clearInterval(that.data.waitTimer);
                                     setTimeout(function () {
-                                        if (that.data.goto.toUpperCase() == "WATERELECTRICITY") {
-                                            wx.navigateTo({
-                                                url: '/pages/user/detail?key=waterElectricity'
-                                            });
-                                        }
-                                        else if (that.data.goto.toUpperCase() == "BILL2") {
-                                            wx.navigateTo({
-                                                url: '/pages/bill/detail?key=bill2&deviceId=' + that.data.deviceId
-                                            });
-                                        }
-                                        else {
-                                            wx.reLaunch({url: '/pages/bill/bill'});
-                                        }
+                                        wx.navigateTo({
+                                            url: '/pages/user/detail?key=waterElectricity'
+                                        });
                                     }, 1000);
                                 }
                             });
@@ -179,7 +159,7 @@ Page({
                 var amount = parseInt((parseFloat(that.data.repayAmount) * 100).toFixed());
                 var paymentTime = that.data.order.paymentTime.substring(0, 10);
                 wx.navigateTo({
-                    url: '/pages/bill/detail?key=precreate&goto=' + that.data.goto + '&transactionId=' + transactionId + '&amount=' + amount + '&paymentTime=' + paymentTime
+                    url: '/pages/bill/detail?key=precreate&goto=waterElectricity&transactionId=' + transactionId + '&amount=' + amount + '&paymentTime=' + paymentTime
                 });
             });
         }
@@ -194,19 +174,9 @@ Page({
                         isTransaction = true;
                         clearInterval(that.data.waitTimer);
                         setTimeout(function () {
-                            if (that.data.goto.toUpperCase() == "WATERELECTRICITY") {
-                                wx.navigateTo({
-                                    url: '/pages/user/detail?key=waterElectricity'
-                                });
-                            }
-                            else if (that.data.goto.toUpperCase() == "BILL2") {
-                                wx.navigateTo({
-                                    url: '/pages/bill/detail?key=bill2&deviceId=' + that.data.deviceId
-                                });
-                            }
-                            else {
-                                wx.reLaunch({url: '/pages/bill/bill'});
-                            }
+                            wx.navigateTo({
+                                url: '/pages/user/detail?key=waterElectricity'
+                            });
                         }, 1000);
                     }
                 }

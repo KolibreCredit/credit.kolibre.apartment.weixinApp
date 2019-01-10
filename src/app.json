@@ -14,7 +14,8 @@
     "pages/bill/detail",
     "pages/service/detail",
     "pages/service/service",
-    "pages/bill/wxpay"
+    "pages/bill/wxpay",
+    "pages/bill/wxpay2"
   ],
   "window": {
     "backgroundTextStyle": "light",

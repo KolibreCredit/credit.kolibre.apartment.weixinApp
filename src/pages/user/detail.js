@@ -66,5 +66,15 @@ Page({
                 detailWebAppUrl: app.baseUrl + "settlement.html"
             });
         }
+        else if (options.key == "waterElectricity") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "waterElectricity.html"
+            });
+        }
+        else if (options.key == "gateLock") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "gateLock.html"
+            });
+        }
     }
 })

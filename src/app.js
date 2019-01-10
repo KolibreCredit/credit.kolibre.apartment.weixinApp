@@ -65,7 +65,7 @@ App({
             }
         });
     },
-    getInvoke2: function (apiUrl, cbSuccess, cbfail) {
+    getInvoke2: function (apiUrl, cbSuccess) {
         var auth = this.getStorageSync("X-KC-SID");
         wx.request({
             url: apiUrl,
@@ -79,11 +79,11 @@ App({
                 if (res.succeeded) {
                     typeof cbSuccess == "function" && cbSuccess(res);
                 } else {
-                    typeof cbfail == "function" && cbfail(res);
+                    typeof cbSuccess == "function" && cbSuccess(res);
                 }
             },
             fail: function () {
-                cbfail({succeeded: false, message: "网络链接异常,请稍后"});
+                cbSuccess({succeeded: false, message: "网络链接异常,请稍后"});
             }
         });
     },

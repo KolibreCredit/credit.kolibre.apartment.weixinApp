@@ -1,25 +1,45 @@
+<!-- showToast -->
+<import src="../../utils/showToast.wxml"/>
+<template is="showToast" data="{{showToast: showToast}}"/>
 <!--pages/user/user.wxml-->
 <import src="../../utils/wxStar.wxml"/>
 <view class="container">
-    <image class="bgImg" src="../../images/user.png"></image>
     <view class="userInfoDiv">
-        <view style="margin-top:30px;height:22px"><span class="userName">{{tenant.realName==null?'':tenant.realName}}</span>
+        <view style="position:relative;padding-left:100px">
+            <image src="../../images/ic_userImg.png"/>
+            <view style="margin-top:5px">
+                <span class="userName">{{tenant.realName==null?'':tenant.realName}}</span>
+                <span class="accountNo">{{tenant.cellphone}}</span>
+            </view>
+            <view style="margin-top:5px;font-size:14px;color:#666666;text-align:center;display:flex;line-height:24px">
+                <view>
+                    <template is="wxStar" data="{{wxStar: wxStar}}"/>
+                </view>
+            </view>
         </view>
-        <view style="height:30px;margin-top:15px"><span class="accountNo">{{tenant.cellphone}}</span>
-        </view>
-        <image src="../../images/ic_userImg.png"/>
     </view>
-    <view style="font-size:14px;color:#666666;text-align:center;display:flex;line-height:24px;justify-content:center">
-        <view>
-            信用等级
+    <image class="bgImg" src="../../images/20190108/user.png"></image>
+    <view class="category">
+        <view class="item" bindtap="list">
+            <image src="../../images/20190108/zuyue.png"/>
+            <view>我的租约</view>
         </view>
-        <view>
-            <template is="wxStar" data="{{wxStar: wxStar}}"/>
+        <view class="item" bindtap="bill">
+            <image src="../../images/20190108/zhangdan.png"/>
+            <view>我的账单</view>
+        </view>
+        <view class="item" bindtap="waterElectricity">
+            <image src="../../images/20190108/suidianbiao.png"/>
+            <view>智能水电表</view>
+        </view>
+        <view class="item" bindtap="gateLock">
+            <image src="../../images/20190108/mensuo.png"/>
+            <view>智能门锁</view>
         </view>
     </view>
     <view style="background-color:#ffffff;padding:0 20px">
         <view class="userManageList">
-            <view class="item" bindtap="list">
+            <view class="item" bindtap="list" style="display:none">
                 <image src="../../images/list.png" class="icon"></image>
                 <text>我的租约</text>
                 <span wx:if="{{unConfirmedContractCount>0}}"
@@ -27,7 +47,7 @@
                         style="background:#ff0100;width:7px;height:7px;border-radius:100%;display:inline-block;margin-left:5px"></span></span>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
             </view>
-            <view class="item" bindtap="bill">
+            <view class="item" bindtap="bill" style="display:none">
                 <image src="../../images/bill.png" class="icon"/>
                 <text>我的账单</text>
                 <image src="../../images/ic_grey_arrow.png" class="ic_grey_arrow"></image>
@@ -64,5 +84,28 @@
         </view>
     </view>
     <view style="height:60px"></view>
+    <view wx:if="{{isAlert}}" class="msg-alert" style="z-index:2;padding:0 20px">
+        <view class="msg-body"  style="width:100%;background-color: rgba(255, 255, 255, 1);box-shadow: 0px 15px 25px 0px rgba(0, 0, 0, 0.2)">
+            <view style="margin-top:30px;text-align:center">
+                <image src="../../images/20190108/tip5.png" style="height:40px;width:40px"/>
+            </view>
+            <view style="margin-top:20px;font-size:18px;color:#646464;line-height:25px;font-weight:bold">
+                请先确认租约
+            </view>
+            <view style="margin-top:20px;font-size:14px;color:#646464;line-height:28px;padding-left:20px;padding-right:20px;text-align:center">
+                {{msgAlert}}
+            </view>
+            <view style="margin-top:40px">
+                <button class="btnActive"
+                        style="background:#ff8c14;border-radius:44px;height:44px;color:#ffffff;font-size:18px;width:90%;border:none"
+                        bindtap="list">去确认
+                </button>
+            </view>
+            <view style="margin-top:20px;text-align:center">
+                <span style="font-size:14px;color:#ff8c14" bindtap="closeAlert">暂不确认</span>
+            </view>
+            <view style="height:20px"></view>
+        </view>
+    </view>
 </view>
 <tabbar data="{{tabbar}}"></tabbar>

@@ -23,7 +23,7 @@ function wxStarChange(e) {
     else star[i] = [0, 0];
   }
   this.setData({
-    wxStar: star,
+    wxStar: star
   })
   // 选择星之后，回调方法
   if (this.starChangeCb) this.starChangeCb();

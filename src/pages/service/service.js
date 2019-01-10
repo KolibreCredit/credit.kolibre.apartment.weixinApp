@@ -18,9 +18,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        var that = this;
         tabbar.index = 3;
-        this.setData({
-            tabbar: tabbar
+        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+            if (res.succeeded) {
+                if (res.data > 0) {
+                    tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
+                    tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+            }
+            that.setData({
+                tabbar: tabbar
+            });
         });
     },
     onShow: function () {

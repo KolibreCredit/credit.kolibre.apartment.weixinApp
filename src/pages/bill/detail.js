@@ -14,7 +14,7 @@ Page({
         var key = options.key;
         if (key == "billView") {
             this.setData({
-                detailWebAppUrl: app.baseUrl + "billView.html?orderId=" + options.orderId
+                detailWebAppUrl: app.baseUrl + "billView.html?goto=minibill&orderId=" + options.orderId
             });
         } else if (key == "recognitionface") {
             this.setData({
@@ -25,8 +25,14 @@ Page({
             var transactionId = options.transactionId;
             var amount = options.amount;
             var paymentTime = options.paymentTime;
+            var goto = options.goto;
             this.setData({
-                detailWebAppUrl: app.baseUrl + "precreate.html?transactionId=" + transactionId + "&amount=" + amount + "&paymentTime=" + paymentTime
+                detailWebAppUrl: app.baseUrl + "precreate.html?goto=" + goto + "&transactionId=" + transactionId + "&amount=" + amount + "&paymentTime=" + paymentTime
+            });
+        }
+        else if (key == "bill2") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "bill2.html?deviceId=" + options.deviceId
             });
         }
     }

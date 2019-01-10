@@ -53,13 +53,10 @@ Page({
         } else {
             assetTenancyId = app.getStorageSync("assetTenancyId") || "";
         }
-        tabbar.index = 0;
-        this.setData({
-            tabbar: tabbar,
-            assetTenancyId: assetTenancyId
-        });
+        //
+        this.setData({assetTenancyId: assetTenancyId});
         var that = this;
-        app.getInvoke(config.URLS.GETROOMSOURCEFILTERINFO + this.data.assetTenancyId, function (res) {
+        app.getInvoke(config.URLS.GETROOMSOURCEFILTERINFO + assetTenancyId, function (res) {
             if (res.succeeded) {
                 that.setData({
                     districts: [{city: "不限", areas: []}].concat(res.data.districts),
@@ -71,6 +68,21 @@ Page({
             mui.toast(err.message);
         });
         this.filterRoomSource();
+    },
+    onShow: function () {
+        var that = this;
+        tabbar.index = 0;
+        app.getInvoke2(config.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+            if (res.succeeded) {
+                if (res.data > 0) {
+                    tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
+                    tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+            }
+            that.setData({
+                tabbar: tabbar
+            });
+        });
     },
     upper: function (e) {
         this.setData({

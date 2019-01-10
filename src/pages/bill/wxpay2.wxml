@@ -1,0 +1,79 @@
+<!-- showToast -->
+<import src="../../utils/showToast.wxml"/>
+<template is="showToast" data="{{showToast: showToast}}"/>
+<!-- filter -->
+<wxs module="filter" src="../../filter/filter.wxs"></wxs>
+<!--pages/bill/wxpay.wxml-->
+<view class="container">
+    <view style="background-color:white">
+        <view style="height:80px">
+            <image src="../../images/20190108/fang.png" style="width:38px;height:38px;margin-top:20px;margin-left:20px"/>
+            <span style="position:absolute;left:70px;top:20px;font-size:14px">{{apartmentName}}</span>
+            <span style="position:absolute;left:70px;top:40px;font-size: 16px;font-weight:bold">{{roomNumber}}</span>
+        </view>
+        <view style="height:10px;background-color:#f4f4f4">
+        </view>
+        <view style="padding-left:20px">
+            <view class="title" style="height:60px;line-height:60px">
+                充值类型<span style="font-size:16px">{{deviceType}}</span>
+            </view>
+            <view class="title" style="border-top: 1px solid #e9e9e9;height:60px;line-height:60px;position:relative">
+                支付金额 <input focus="{{focus}}" maxlength="10" type="text" style="position:absolute;top:18px;right:20px;border:0;font-size:20px;display:inline-block;color:#646464;text-align:right;padding-right:2px" placeholder="请输入充值金额" value="{{repayAmount}}" bindinput="bindKeyInput"/>
+            </view>
+            <view style="border-top: 1px solid #e9e9e9">
+                <view style="padding-top:20px">
+                    <view class="item {{tabIndex==0?'active':'' }}" bindtap="itemSelect" data-index="0">
+                        <span>30元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view class="item {{tabIndex==1?'active':'' }}" bindtap="itemSelect"  data-index="1">
+                        <span>50元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view class="item {{tabIndex==2?'active':'' }}" bindtap="itemSelect"  data-index="2">
+                        <span>100元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view style="clear:both"></view>
+                </view>
+                <view style="padding-top:10px;padding-bottom:10px">
+                    <view class="item {{tabIndex==3?'active':'' }}" bindtap="itemSelect"  data-index="3">
+                        <span>200元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view class="item {{tabIndex==4?'active':'' }}" bindtap="itemSelect"  data-index="4">
+                        <span>500元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view class="item {{tabIndex==5?'active':'' }}" bindtap="itemSelect"  data-index="5">
+                        <span>1000元</span>
+                        <image src="../../images/20190108/select.png" style="width:26px;height: 20px"/>
+                    </view>
+                    <view style="clear:both"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="font-size: 16px; color: #999999; line-height: 45px; height: 45px; padding-left:20px">
+        支付方式
+    </view>
+    <view style="padding:0 20px; background-color: white">
+        <view style="padding:15px 0" bindtap="weixinPayment">
+            <view style="width:100%;height:30px">
+                <image src="../../images/weixin.png" style="height:30px;width:153px"/>
+                <image src="../../images/right.png" style="height:18px;width:18px;float:right;margin-top:6px"/>
+            </view>
+        </view>
+    </view>
+    <view style="padding:0 20px; background-color: white">
+        <view style="padding:15px 0;border-top:1px solid #e9e9e9" bindtap="zhifubaoPayment">
+            <view style="width:100%;height:30px">
+                <image src="../../images/zhifubao.png" style="height:30px;width:153px"/>
+                <image src="../../images/right.png" style="height:18px;width:18px;float:right;margin-top:6px"/>
+            </view>
+        </view>
+    </view>
+    <view style="text-align: center">
+        <image src="../../images/fengniaowupay.png" mode="aspectFit"/>
+    </view>
+</view>

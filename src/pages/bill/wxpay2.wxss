@@ -1,0 +1,50 @@
+/* pages/bill/wxpay.wxss */
+page {
+  padding: 0;
+  margin: 0;
+  background-color: #f4f4f4;
+  font-family: 'HiraginoSansGB W3', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+}
+
+.title {
+  padding-right: 20px;
+  font-size: 16px;
+  color: #666666;
+  border: 0;
+  text-align: left;
+  line-height: 30px;
+  white-space: nowrap;
+}
+.title span {
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  float: right;
+}
+.item {
+  width: 30%;
+  margin-right:2%;
+  height: 40px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(232, 232, 232, 1);
+  float: left;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+.item image {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+.active {
+  background-color: rgba(255, 140, 20, 0.1);
+  border: 1px solid rgba(255, 140, 20, 1);
+}
+
+.active image {
+  display: block;
+}

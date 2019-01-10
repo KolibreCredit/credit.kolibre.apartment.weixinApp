@@ -20,7 +20,9 @@ var config = {
         GETORDERBYORDERID: "https://kc-talos.fengniaowu.com:4431/api/Order/GetOrderByOrderId?orderId=",
         CREATETRANSACTION: "https://kc-talos.fengniaowu.com:4431/api/Transaction/CreateTransaction",
         GETWECHATOPENID: "https://kc-talos.fengniaowu.com:4431/api/Payment/GetWeChatOpenId",
-        ORDERPAYMENT: "https://kc-talos.fengniaowu.com:4431/api/Payment/Applets/OrderPayment"
+        ORDERPAYMENT: "https://kc-talos.fengniaowu.com:4431/api/Payment/Applets/OrderPayment",
+        WHETHERCONFIRMCONTRACT:"https://kc-talos.fengniaowu.com:4431/api/TenantDevice/WhetherConfirmContract",
+        TENANTENERGYMETERRECHAGE: "https://kc-talos.fengniaowu.com:4431/api/TenantDevice/TenantEnergyMeterRechage"
     },
     REGEX: {
         CELLPHONE: /^(13|14|15|16|17|18|19|10)\d{9}$/,

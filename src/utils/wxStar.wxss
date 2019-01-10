@@ -8,10 +8,10 @@
   flex: 1;
   height: 40rpx;
   margin: 5rpx;
-  color: #ccc;
+  color: #FEA25E;
   text-align: center;
   line-height: 40rpx;
-  font-size: 40rpx;
+  font-size: 50rpx;
 }
 
 .wx-star-right {
@@ -25,5 +25,5 @@
 }
 
 .wx-star .wx-star-checked {
-  color: #FF9800;
+  color: #FFFFFF;
 }
