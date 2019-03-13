@@ -22,7 +22,8 @@ Page({
         isNoData: false,
         contractId: "",
         isApply: false,
-        isQuash: false
+        isQuash: false,
+        tabIndex: 0
     },
     /**
      * 生命周期函数--监听页面加载
@@ -51,24 +52,56 @@ Page({
     getCurrentcontracts: function () {
         var that = this;
         app.getInvoke(constants.URLS.GETCURRENTCONTRACTS, function (res) {
+            var jsonData = [];
             if (res.succeeded && res.data.length > 0) {
+                if (that.data.tabIndex == 0) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (res.data[i].rentalMode == "MonthlyRent") {
+                            jsonData.push(res.data[i]);
+                        }
+                    }
+                } else {
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (res.data[i].rentalMode == "DailyRent") {
+                            jsonData.push(res.data[i]);
+                        }
+                    }
+                }
+            }
+            if (jsonData.length > 0) {
                 var confirmCount = 0;
-                for (var i = 0; i < res.data.length; i++) {
-                    if (!res.data[i].confirmed) {
+                for (var i = 0; i < jsonData.length; i++) {
+                    if (!jsonData[i].confirmed) {
                         confirmCount = confirmCount + 1;
                     }
                 }
                 that.setData({
                     confirmCount: confirmCount,
-                    contracts: res.data
+                    contracts: jsonData,
+                    isNoData: false
                 });
             } else {
-                that.setData({isNoData: true});
+                that.setData({
+                    confirmCount: 0,
+                    isNoData: true
+                });
             }
         }, function (err) {
-            that.setData({isNoData: true});
+            that.setData({
+                confirmCount: 0,
+                isNoData: true
+            });
             mui.toast(err.message);
         });
+    },
+    selectTab: function (e) {
+        var index = e.currentTarget.dataset.index * 1;
+        if (this.data.tabIndex != index) {
+            this.setData({
+                tabIndex: index
+            });
+            this.getCurrentcontracts();
+        }
     },
     view: function (e) {
         var contractId = e.currentTarget.dataset.contractid;

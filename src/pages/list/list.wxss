@@ -95,13 +95,33 @@ page {
 .staged {
   color: #7ed321;
 }
-
 .eviction {
   color: #ff7e71;
 }
-
 .msg-alert {
   z-index: 2;
+}
+.selectTable {
+  width: 100%;
+  height: 50px;
+  display:flex;
+}
+.selectTable .tabItem {
+  width: 50%;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.selectTable .tabItem span {
+  padding: 0 15px 10px 15px;
+  border-bottom: 2px solid #ffffff;
+  color: #666666;
+}
+.selectTable .active span {
+  border-bottom: 2px solid #ff8c14;
+  color: #ff8c14;
 }
 
 .listTip {
@@ -110,13 +130,10 @@ page {
   padding-left: 20px;
   font-size: 14px;
   color: #ff8c14;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 2;
 }
-
-.listLeases {
-  margin-top: 30px;
+.listLeases1 {
+  margin-top: 60px;
+}
+.listLeases2 {
+  margin-top: 90px;
 }

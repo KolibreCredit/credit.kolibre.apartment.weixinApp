@@ -51,7 +51,20 @@ var filter = {
             rentalType = "两月一付";
         }
         else if (payPeriod == 5) {
-          rentalType = "五月一付";
+            rentalType = "五月一付";
+        }
+        return rentalType;
+    },
+    getPayPeriod2: function (payPeriod) {
+        var rentalType = "";
+        if (payPeriod == 0) {
+            rentalType = "全额付";
+        }
+        else if (payPeriod == 1) {
+            rentalType = "一天一付";
+        }
+        else if (payPeriod == 2) {
+            rentalType = "两天一付";
         }
         return rentalType;
     },
@@ -209,6 +222,6 @@ module.exports = {
     orderStateToLowerCase: filter.orderStateToLowerCase,
     getCleaningState: filter.getCleaningState,
     getCleaningTypes: filter.getCleaningTypes,
-    getRepairType: filter.getRepairType
-
+    getRepairType: filter.getRepairType,
+    getPayPeriod2:filter.getPayPeriod2
 }

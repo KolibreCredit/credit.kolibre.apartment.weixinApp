@@ -5,11 +5,21 @@
 <wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/list/list.wxml-->
 <view class="container">
-    <view wx:if="{{!isNoData && confirmCount>0}}" class="listTip">
-        <image src="../../images/tip.png" style="width:14px;height:14px;margin-top:8px;margin-right:10px"/>
-        您有<span>{{confirmCount}}</span>个待确认租约
+    <view style="position:fixed;width:100%;left:0;top:0;background:#ffffff;z-index:100">
+        <view class="selectTable">
+            <view class="tabItem {{tabIndex==0?'active':'' }}" data-index="0" bindtap="selectTab">
+                <span>租房合同</span>
+            </view>
+            <view class="tabItem {{tabIndex==1?'active':''}}" data-index="1" bindtap="selectTab">
+                <span>日租订单</span>
+            </view>
+        </view>
+        <view wx:if="{{!isNoData && confirmCount>0}}" class="listTip">
+            <image src="../../images/tip.png" style="width:14px;height:14px;margin-top:8px;margin-right:10px"/>
+            您有<span>{{confirmCount}}</span>个待确认租约
+        </view>
     </view>
-    <view wx:if="{{!isNoData}}" class="{{confirmCount>0?'listLeases':''}}">
+    <view wx:if="{{!isNoData}}" class="{{confirmCount>0?'listLeases2':'listLeases1'}}">
         <view style="height:0px"></view>
         <view class="mui-table-view" wx:for="{{contracts}}">
             <view class="mui-table-view-cell" style="box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)">
@@ -34,7 +44,7 @@
                         {{item.roomNumber}}室
                     </view>
                     <view class="mui-ellipsis" style="font-size:16px;color:#646464">
-                        ¥{{filter.formatAmount(item.monthlyAmount)}}/月，按{{item.yueFu?"月付":filter.getPayPeriod(item.payPeriod)}}
+                        ¥{{filter.formatAmount(item.monthlyAmount)}}/{{item.rentalMode == "MonthlyRent"?"月":"天"}}，按{{item.yueFu?"月付":(item.rentalMode=="MonthlyRent"?filter.getPayPeriod(item.payPeriod):filter.getPayPeriod2(item.payPeriod))}}
                     </view>
                     <image class="ic_grey_arrow" src="../../images/ic_grey_arrow.png"/>
                 </view>
@@ -66,11 +76,11 @@
         <view style="height:60px"></view>
     </view>
     <view wx:if="{{isNoData}}" class="noData">
-        <view style="text-align:center">
+        <view style="text-align:center;margin-top:40%">
             <image src="../../images/nodata1.png" style="width:100px;height:100px"/>
         </view>
         <view style="margin-top:20px;font-size: 16px;color:#999999;text-align:center">
-            亲，您还没有租约哦
+            {{tabIndex==0?"亲，您还没有租约哦":"亲，您还没有日租订单呢"}}
         </view>
         <view style="height:50px"></view>
     </view>
