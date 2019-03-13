@@ -1,6 +1,7 @@
 const app = getApp();
 const constants = require('../../config');
 const $toast = require('../../utils/showToast');
+const util = require('../../utils/util');
 const mui = {
     toast: function (title) {
         $toast.showToast({
@@ -9,6 +10,7 @@ const mui = {
         });
     }
 };
+
 // pages/bill/wxpay2.js
 var transactionId = "";
 var isTransaction = true;
@@ -64,6 +66,14 @@ Page({
             mui.toast("支付金额不能为零!");
             return false;
         }
+        if (parseFloat(amount) < 0) {
+            mui.toast("支付金额不能小于零!");
+            return false;
+        }
+        if (parseFloat(amount) > 100000) {
+            mui.toast("支付金额不能大于10万!");
+            return false;
+        }
         return true;
     },
     createTransaction: function (transactionMethod, callSuccess) {
@@ -72,7 +82,7 @@ Page({
             amount: parseInt((parseFloat(this.data.repayAmount) * 100).toFixed()),
             transactionMethod: transactionMethod
         };
-        app.postInvoke(constants.URLS.CREATETRANSACTION, data, function (res) {
+        app.postInvoke(constants.URLS.TENANTENERGYMETERRECHAGE, data, function (res) {
             if (res.succeeded) {
                 callSuccess(res);
             } else {
@@ -157,14 +167,13 @@ Page({
             this.createTransaction("AliPay", function (res) {
                 transactionId = res.data.transactionId;
                 var amount = parseInt((parseFloat(that.data.repayAmount) * 100).toFixed());
-                var paymentTime = that.data.order.paymentTime.substring(0, 10);
+                var paymentTime = util.formatTime2(new Date());
                 wx.navigateTo({
                     url: '/pages/bill/detail?key=precreate&goto=waterElectricity&transactionId=' + transactionId + '&amount=' + amount + '&paymentTime=' + paymentTime
                 });
             });
         }
     },
-
     queryTransaction: function () {
         if (transactionId != "") {
             var that = this;
