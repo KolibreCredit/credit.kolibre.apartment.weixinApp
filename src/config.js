@@ -124,7 +124,8 @@ var config = {
         cleaningType: "请选择保洁类型",
         cancelCleaning: "取消成功",
         shortLink: "短链创建成功",
-        loginOut: "退出成功"
+        loginOut: "退出成功",
+        transaction:"订单正在支付请稍后"
     }
 };
 
