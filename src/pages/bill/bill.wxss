@@ -13,8 +13,9 @@ input[type=text], input[type=password] {
 .selectTable {
   width: 100%;
   height: 44px;
-  display:flex;
+  display: flex;
 }
+
 .selectTable .tabItem {
   width: 50%;
   height: 44px;
@@ -22,6 +23,7 @@ input[type=text], input[type=password] {
   text-align: center;
   font-size: 16px;
 }
+
 .selectTable .tabItem span {
   padding: 0 15px 10px 15px;
   border-bottom: 2px solid #ffffff;
@@ -32,16 +34,19 @@ input[type=text], input[type=password] {
   border-bottom: 2px solid #ff8c14;
   color: #ff8c14;
 }
+
 .billList {
   margin: 0;
   padding: 0;
   position: relative;
 }
+
 .billItem {
   margin-top: 10px;
   background: #ffffff;
   position: relative;
 }
+
 .billItem .top {
   padding: 0 20px;
   font-size: 14px;
@@ -107,7 +112,6 @@ input[type=text], input[type=password] {
   white-space: nowrap;
   padding: 8px 0;
 }
-
 .billType .col3 {
   width: 80px;
   flex: none;
@@ -300,7 +304,6 @@ input[type=text], input[type=password] {
   text-align: center;
   display: inline-block;
 }
-
 
 @media only screen and (max-width: 320px) {
   .billItem .billType {
