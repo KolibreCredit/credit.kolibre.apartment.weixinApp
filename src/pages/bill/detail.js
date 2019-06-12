@@ -35,5 +35,10 @@ Page({
                 detailWebAppUrl: app.baseUrl + "bill2.html?deviceId=" + options.deviceId
             });
         }
+        else if (key == "invoice") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "invoice.html?contractId=" + options.contractId
+            });
+        }
     }
 })

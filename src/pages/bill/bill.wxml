@@ -214,7 +214,8 @@
                         <span wx:elif="{{item.serviceCharge > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.serviceCharge)}}元手续费)</span>
                         <span wx:elif="{{item.penaltyAmount > 0}}" style="margin-left:5px;display:inline-block">(含{{filter.formatAmount(item.penaltyAmount)}}元违约金)</span>
                     </view>
-                    <view class="bottom">
+                    <view wx:if="{{item.canInvoice}}" class="bottom">
+                         <span class="billbtnPay btnActive" bindtap="invoice" data-contractid="{{item.contractId}}">申请开票</span>
                     </view>
                 </view>
             </block>

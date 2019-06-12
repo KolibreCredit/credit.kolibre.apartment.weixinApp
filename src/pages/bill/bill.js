@@ -30,11 +30,15 @@ Page({
         this.findAllLeaseOrder();
         var that = this;
         tabbar.index = 2;
-        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+        app.getInvoke2(constants.URLS.GETTENANTSTATISTICINFO, function (res) {
             if (res.succeeded) {
-                if (res.data > 0) {
+                if (res.data.contractCount > 0) {
                     tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
                     tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+                if (res.data.invoiceCount > 0) {
+                    tabbar.list[4].iconPath = "/images/tabBar/zhanghus.png";
+                    tabbar.list[4].selectedIconPath = "/images/tabBar/zhanghus_active.png";
                 }
             }
             that.setData({
@@ -90,6 +94,12 @@ Page({
         var orderId = e.currentTarget.dataset.orderid;
         wx.navigateTo({
             url: '/pages/bill/detail?key=recognitionface&orderId=' + orderId
+        });
+    },
+    invoice: function (e) {
+        var contractId = e.currentTarget.dataset.contractid;
+        wx.navigateTo({
+            url: '/pages/bill/detail?key=invoice&contractId=' + contractId
         });
     },
     createTransaction: function (e) {

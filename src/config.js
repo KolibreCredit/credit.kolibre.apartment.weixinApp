@@ -1,10 +1,10 @@
 var config = {
     URLS: {
-        GETROOMSOURCEFILTERINFO:"https://kc-talos.fengniaowu.com:4431/api/RoomSource/GetRoomSourceFilterInfo?assetTenancyId=",
-        GETROOMSOURCEINFOS:"https://kc-talos.fengniaowu.com:4431/api/RoomSource/GetRoomSourceInfos",
+        GETROOMSOURCEFILTERINFO: "https://kc-talos.fengniaowu.com:4431/api/RoomSource/GetRoomSourceFilterInfo?assetTenancyId=",
+        GETROOMSOURCEINFOS: "https://kc-talos.fengniaowu.com:4431/api/RoomSource/GetRoomSourceInfos",
         GETROOMSOURCES: "https://kc-talos.fengniaowu.com:4431/api/Room/GetRoomSources",
         GETCURRENTTENANT: "https://kc-talos.fengniaowu.com:4431/api/Tenant/GetCurrentTenant",
-        GETUNCONFIRMEDCONTRACTCOUNT: "https://kc-talos.fengniaowu.com:4431/api/Contract/GetUnConfirmedContractCount",
+        GETTENANTSTATISTICINFO: "https://kc-talos.fengniaowu.com:4431/api/Tenant/GetTenantStatisticInfo",
         SEND: "https://kc-talos.fengniaowu.com:4431/api/ValidateCode/Send",
         VERIFY: "https://kc-talos.fengniaowu.com:4431/api/ValidateCode/Verify",
         QUICKLOGIN: "https://kc-talos.fengniaowu.com:4431/api/ValidateCodeLogin/Tenant/QuickLogin",
@@ -21,8 +21,9 @@ var config = {
         CREATETRANSACTION: "https://kc-talos.fengniaowu.com:4431/api/Transaction/CreateTransaction",
         GETWECHATOPENID: "https://kc-talos.fengniaowu.com:4431/api/Payment/GetWeChatOpenId",
         ORDERPAYMENT: "https://kc-talos.fengniaowu.com:4431/api/Payment/Applets/OrderPayment",
-        WHETHERCONFIRMCONTRACT:"https://kc-talos.fengniaowu.com:4431/api/TenantDevice/WhetherConfirmContract",
-        TENANTENERGYMETERRECHAGE: "https://kc-talos.fengniaowu.com:4431/api/TenantDevice/TenantEnergyMeterRechage"
+        WHETHERCONFIRMCONTRACT: "https://kc-talos.fengniaowu.com:4431/api/TenantDevice/WhetherConfirmContract",
+        TENANTENERGYMETERRECHAGE: "https://kc-talos.fengniaowu.com:4431/api/TenantDevice/TenantEnergyMeterRechage",
+        ENERGYMETERUSAGEPAYMENT: "https://kc-talos.fengniaowu.com:4431/api/TenantDevice/EnergyMeterUsagePayment"
     },
     REGEX: {
         CELLPHONE: /^(13|14|15|16|17|18|19|10)\d{9}$/,
@@ -125,8 +126,7 @@ var config = {
         cancelCleaning: "取消成功",
         shortLink: "短链创建成功",
         loginOut: "退出成功",
-        transaction:"订单正在支付请稍后"
+        transaction: "订单正在支付请稍后"
     }
 };
-
 module.exports = config;

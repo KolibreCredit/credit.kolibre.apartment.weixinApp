@@ -5,7 +5,8 @@
 <wxs module="filter" src="../../filter/filter.wxs"></wxs>
 <!--pages/index/index.wxml-->
 <view class="container">
-    <scroll-view style="height:100vh" scroll-y="true" upper-threshold="180" bindscroll="scroll"  bindscrolltoupper="upper" bindscrolltolower="lower">
+    <scroll-view style="height:100vh" scroll-y="true" upper-threshold="180" bindscroll="scroll"
+                 bindscrolltoupper="upper" bindscrolltolower="lower">
         <view style="text-align:center;background-color:white;width:100%">
             <view style="text-align:center">
                 <image src="../../images/bg.png" style="width:100%;height:180px;vertical-align:bottom"></image>
@@ -116,12 +117,15 @@
                     <view class="picture"
                           style="background:url('{{filter.roomSourcesPictures(item.pictures)}}');background-size: cover;background-position:center"/>
                     <view class="apartmentName">{{item.roomSourceName}}</view>
-                    <view class="retailPrice">
-                        {{filter.formatPrice2(item.retailPrice)}}
+                    <view class="rentType">
+                        {{filter.getRentType(item.rentType)}} / {{item.roomTypeName}} / {{filter.getRoomTypeSize(item.roomTypeSize)}}㎡
                     </view>
                     <view class="addr">
                         <image src="../../images/addr.png"/>
                         {{item.apartmentAddress}}
+                    </view>
+                    <view class="retailPrice">
+                        {{filter.formatPrice2(item.retailPrice)}}
                     </view>
                     <view class="roomSourceFeature">
                         <span wx:for="{{item.roomSourceFeature}}" wx:for-item="subItem" wx:if="{{index<2}}">
@@ -142,7 +146,7 @@
                             </span>
                         </view>
                     </view>
-                    <view class="apartmentName">{{item.roomSourceName}}</view>
+                    <view class="apartmentName">{{item.roomSourceName}}/ {{filter.getRentType(item.rentType)}} / {{item.roomTypeName}} / {{filter.getRoomTypeSize(item.roomTypeSize)}}㎡</view>
                     <view class="addr">
                         <image src="../../images/addr.png"/>
                         {{item.apartmentAddress}}

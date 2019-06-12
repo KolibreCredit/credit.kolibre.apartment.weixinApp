@@ -47,6 +47,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.showShareMenu({
+            withShareTicket: true
+        });
         var assetTenancyId = options.assetTenancyId || "";
         if (assetTenancyId != "") {
             app.setStorageSync("assetTenancyId", assetTenancyId);
@@ -72,11 +75,15 @@ Page({
     onShow: function () {
         var that = this;
         tabbar.index = 0;
-        app.getInvoke2(config.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+        app.getInvoke2(config.URLS.GETTENANTSTATISTICINFO, function (res) {
             if (res.succeeded) {
-                if (res.data > 0) {
+                if (res.data.contractCount > 0) {
                     tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
                     tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+                if (res.data.invoiceCount > 0) {
+                    tabbar.list[4].iconPath = "/images/tabBar/zhanghus.png";
+                    tabbar.list[4].selectedIconPath = "/images/tabBar/zhanghus_active.png";
                 }
             }
             that.setData({

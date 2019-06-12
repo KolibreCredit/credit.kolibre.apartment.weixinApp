@@ -76,5 +76,15 @@ Page({
                 detailWebAppUrl: app.baseUrl + "gateLock.html"
             });
         }
+        else if (options.key == "invoice") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "invoiceList.html"
+            });
+        }
+        else if (options.key == "favor") {
+            this.setData({
+                detailWebAppUrl: app.baseUrl + "favorites.html"
+            });
+        }
     }
 })

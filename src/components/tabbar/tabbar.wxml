@@ -2,6 +2,5 @@
      <view wx:for="{{ data.list }}" wx:for-item="item" wx:for-index="idx" wx:key="key" class="tabbar_item {{item.iconType=='big' ? 'big_icon':''}} {{item.iconType =='overflow' ? 'big_icon overflow':''}}"  data-index="{{idx}}" bindtap="change">
          <text class="tabbar_item_title {{index == idx ? 'selected' : ''}}" style="color:{{data.index==idx && data.selectedColor?data.selectedColor:''}}">{{item.text}}</text>
          <image class="tabbar_item_img {{item.iconType? item.iconType:''}}" src="{{data.index == idx && !item.iconType? item.selectedIconPath : item.iconPath}}"></image>
-        <!-- <span style="position: absolute  ">{{idx}}</span>-->
     </view>
 </view>

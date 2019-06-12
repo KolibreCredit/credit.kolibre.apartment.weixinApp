@@ -19,6 +19,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        op: "",
         focus: true,
         tabIndex: -1,
         repayAmount: "",
@@ -33,16 +34,27 @@ Page({
      */
     onLoad: function (options) {
         isTransaction = true;
-        var apartmentName = decodeURI(options.apartmentName);
-        var roomNumber = decodeURI(options.roomNumber);
-        var deviceType = decodeURI(options.deviceType);
-        var deviceId = decodeURI(options.deviceId);
-        this.setData({
-            apartmentName: apartmentName,
-            roomNumber: roomNumber,
-            deviceType: deviceType,
-            deviceId: deviceId
-        });
+        var op = options.op;
+        if (op == "waterElectricityPay") {
+            var deviceId = decodeURI(options.deviceId);
+            var amount = decodeURI(options.amount);
+            this.setData({
+                op: op,
+                deviceId: deviceId,
+                repayAmount: amount
+            });
+        } else {
+            var apartmentName = decodeURI(options.apartmentName);
+            var roomNumber = decodeURI(options.roomNumber);
+            var deviceType = decodeURI(options.deviceType);
+            var deviceId = decodeURI(options.deviceId);
+            this.setData({
+                apartmentName: apartmentName,
+                roomNumber: roomNumber,
+                deviceType: deviceType,
+                deviceId: deviceId
+            });
+        }
     },
     bindKeyInput: function (e) {
         this.setData({
@@ -86,10 +98,11 @@ Page({
             isTransaction = false;
             var data = {
                 deviceId: this.data.deviceId,
-                amount: parseInt((parseFloat(this.data.repayAmount) * 100).toFixed()),
+                amount: (parseFloat(this.data.repayAmount) * 100).toFixed(),
                 transactionMethod: transactionMethod
             };
-            app.postInvoke(constants.URLS.TENANTENERGYMETERRECHAGE, data, function (res) {
+            var aipUrl = (this.data.op == "waterElectricityPay" ? constants.URLS.ENERGYMETERUSAGEPAYMENT : constants.URLS.TENANTENERGYMETERRECHAGE);
+            app.postInvoke(aipUrl, data, function (res) {
                 if (res.succeeded) {
                     callSuccess(res);
                 } else {
@@ -166,7 +179,7 @@ Page({
         this.createTransaction("AliPay", function (res) {
             isTransaction = true;
             transactionId = res.data.transactionId;
-            var amount = parseInt((parseFloat(that.data.repayAmount) * 100).toFixed());
+            var amount = (parseFloat(that.data.repayAmount) * 100).toFixed();
             var paymentTime = util.formatTime2(new Date());
             wx.navigateTo({
                 url: '/pages/bill/detail?key=precreate&goto=waterElectricity&transactionId=' + transactionId + '&amount=' + amount + '&paymentTime=' + paymentTime

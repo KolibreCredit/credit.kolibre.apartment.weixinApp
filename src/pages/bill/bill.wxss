@@ -286,10 +286,6 @@ input[type=text], input[type=password] {
   box-shadow: 0 2px 4px 0 rgba(78, 40, 0, 0.20);
 }
 
-.paid .bottom {
-  display: none;
-}
-
 .canceled .bottom {
   display: none;
 }

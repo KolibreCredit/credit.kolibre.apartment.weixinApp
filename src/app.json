@@ -22,5 +22,6 @@
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "蜂鸟屋",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

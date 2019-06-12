@@ -20,11 +20,15 @@ Page({
     onLoad: function (options) {
         var that = this;
         tabbar.index = 3;
-        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+        app.getInvoke2(constants.URLS.GETTENANTSTATISTICINFO, function (res) {
             if (res.succeeded) {
-                if (res.data > 0) {
+                if (res.data.contractCount > 0) {
                     tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
                     tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
+                }
+                if (res.data.invoiceCount > 0) {
+                    tabbar.list[4].iconPath = "/images/tabBar/zhanghus.png";
+                    tabbar.list[4].selectedIconPath = "/images/tabBar/zhanghus_active.png";
                 }
             }
             that.setData({

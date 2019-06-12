@@ -215,6 +215,18 @@ var filter = {
             return orderTypeName.substring(0, 7) + "...";
         }
         return orderTypeName;
+    },
+    getRentType: function (rentType) {
+        switch (rentType) {
+            case "ZhengZu":
+                return "整租";
+            default:
+                return "合租";
+        }
+    },
+    getRoomTypeSize: function (roomTypeSize) {
+        roomTypeSize = Number(roomTypeSize * 0.0001);
+        return roomTypeSize.toFixed(2);
     }
 };
 module.exports = {
@@ -232,5 +244,7 @@ module.exports = {
     getCleaningTypes: filter.getCleaningTypes,
     getRepairType: filter.getRepairType,
     getPayPeriod2: filter.getPayPeriod2,
-    getOrderTypeName: filter.getOrderTypeName
+    getOrderTypeName: filter.getOrderTypeName,
+    getRentType: filter.getRentType,
+    getRoomTypeSize: filter.getRoomTypeSize
 }

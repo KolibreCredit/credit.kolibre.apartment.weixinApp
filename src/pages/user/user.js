@@ -19,7 +19,8 @@ Page({
     data: {
         tabbar: null,
         tenant: null,
-        unConfirmedContractCount: 0,
+        contractCount: 0,
+        invoiceCount: 0,
         isAlert: false,
         msgAlert: ""
     },
@@ -34,24 +35,32 @@ Page({
      */
     onShow: function () {
         var that = this;
+        var contractCount = 0;
+        var invoiceCount = 0;
         tabbar.index = 4;
-        app.getInvoke2(constants.URLS.GETUNCONFIRMEDCONTRACTCOUNT, function (res) {
+        app.getInvoke2(constants.URLS.GETTENANTSTATISTICINFO, function (res) {
             if (res.succeeded) {
-                if (res.data > 0) {
+                if (res.data.contractCount > 0) {
                     tabbar.list[1].iconPath = "/images/tabBar/zuyus.png";
                     tabbar.list[1].selectedIconPath = "/images/tabBar/zuyus_active.png";
-                    that.data.unConfirmedContractCount = res.data;
+                    contractCount = res.data.contractCount;
+                }
+                if (res.data.invoiceCount > 0) {
+                    tabbar.list[4].iconPath = "/images/tabBar/zhanghus.png";
+                    tabbar.list[4].selectedIconPath = "/images/tabBar/zhanghus_active.png";
+                    invoiceCount = res.data.invoiceCount
                 }
             }
             that.setData({
                 tabbar: tabbar,
-                unConfirmedContractCount: that.data.unConfirmedContractCount
+                contractCount: contractCount,
+                invoiceCount: invoiceCount
             });
         });
         //
         app.getInvoke(constants.URLS.GETCURRENTTENANT, function (res) {
             if (res.succeeded) {
-                wxStar.wxStar(that, res.data.creditRating,false);
+                wxStar.wxStar(that, res.data.creditRating, false);
                 that.setData({tenant: res.data});
             }
         });
@@ -93,6 +102,16 @@ Page({
     tuikuan: function (e) {
         wx.navigateTo({
             url: '/pages/user/detail?key=tuikuan'
+        });
+    },
+    invoice: function (e) {
+        wx.navigateTo({
+            url: '/pages/user/detail?key=invoice'
+        });
+    },
+    favor: function (e) {
+        wx.navigateTo({
+            url: '/pages/user/detail?key=favor'
         });
     },
     waterElectricity: function (e) {
@@ -139,7 +158,7 @@ Page({
     },
     closeAlert: function (e) {
         this.setData({
-            msgAlert:"",
+            msgAlert: "",
             isAlert: false
         });
     }
